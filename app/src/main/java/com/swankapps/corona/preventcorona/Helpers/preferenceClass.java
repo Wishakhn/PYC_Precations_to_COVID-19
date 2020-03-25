@@ -21,7 +21,7 @@ public class preferenceClass {
 
 
     }
-    void  save_FirstRun(boolean isFirstRun){
+    public void  save_FirstRun(boolean isFirstRun){
         editor = sharedPrefs.edit();
         editor.putBoolean(KEY_FIRST_RUN,isFirstRun);
         editor.apply();

@@ -101,6 +101,5 @@ System.out.println("The List returning is "+slider);
         Intent move = new Intent(IntroSlider.this, AuthOptions.class);
         startActivity(move);
         finish();
-        preference.save_FirstRun(true);
     }
 }

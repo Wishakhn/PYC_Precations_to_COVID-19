@@ -5,25 +5,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:background="@color/background"
     tools:context=".Activities.SearchActivity">
     <include layout="@layout/custom_toolbar"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1"
-    android:background="@color/toolbar">
-    <SearchView
-        android:id="@+id/searchView"
+    android:layout_weight="9.1">
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:queryHint="Search here . . . ."
-        android:iconifiedByDefault="false"
-        android:closeIcon="@drawable/no_blue"
-        android:searchIcon="@drawable/search_blue"
-        android:queryBackground="@null"
-        />
-</LinearLayout>
+        tools:listitem="@layout/item_feeds"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/toolbar">
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search here . . . ."
+            android:iconifiedByDefault="false"
+            android:visibility="gone"
+            android:closeIcon="@drawable/no_blue"
+            android:searchIcon="@drawable/search_blue"
+            android:queryBackground="@null"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
+
 </LinearLayout>
