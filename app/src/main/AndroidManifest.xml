@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profileActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".profileActivity" />
         <activity android:name=".AuthOptions" />
         <activity android:name=".UserAuthentication" />
         <activity android:name=".IntroSlider" />

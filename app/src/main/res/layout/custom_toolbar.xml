@@ -13,7 +13,7 @@
         android:src="@drawable/backarrow_white"
         android:paddingStart="5dp"
         android:paddingLeft="10dp"
-        android:paddingVertical="6dp"
+        android:paddingVertical="8dp"
         />
     <TextView
         android:layout_width="0dp"

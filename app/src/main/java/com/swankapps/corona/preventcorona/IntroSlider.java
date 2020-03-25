@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
@@ -43,6 +44,22 @@ public class IntroSlider extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position <= (adapter.getCount() -1)){
+                    indicator_group.check(position+1);
+
+                }
+                else{
+                    indicator_group.check(position-1);
+                }
+
+                System.out.println("Viewpager position is "+position);
+                indicator_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton btn = group.findViewById(checkedId);
+                        btn.setChecked(true);
+                    }
+                });
             }
 
             @Override
@@ -75,8 +92,10 @@ System.out.println("The List returning is "+slider);
     }
 
     public void skipintro(View view) {
+        preference.save_FirstRun(true);
         Intent move = new Intent(IntroSlider.this, AuthOptions.class);
         startActivity(move);
+        finish();
         preference.save_FirstRun(true);
     }
 }
