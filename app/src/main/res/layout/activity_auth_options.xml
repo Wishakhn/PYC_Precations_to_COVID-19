@@ -5,7 +5,7 @@
     android:background="@color/background"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AuthOptions">
+    tools:context=".Activities.AuthOptions">
     <ImageView
         android:id="@+id/logoimage"
         android:layout_width="wrap_content"

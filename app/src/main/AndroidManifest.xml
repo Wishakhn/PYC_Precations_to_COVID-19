@@ -9,12 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".profileActivity" />
-        <activity android:name=".AuthOptions" />
-        <activity android:name=".UserAuthentication" />
-        <activity android:name=".IntroSlider" />
+        <activity android:name=".Activities.PrecautionActivity"></activity>
+        <activity android:name=".Activities.Myths_Realities" />
+        <activity android:name=".Activities.Remidy_PrecatuionActivity" />
+        <activity android:name=".Activities.SymptomsActivity" />
+        <activity android:name=".Activities.CovidIntro" />
+        <activity android:name=".Activities.SearchActivity" />
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.profileActivity" />
+        <activity android:name=".Activities.AuthOptions" />
+        <activity android:name=".Activities.UserAuthentication" />
+        <activity android:name=".Activities.IntroSlider" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>

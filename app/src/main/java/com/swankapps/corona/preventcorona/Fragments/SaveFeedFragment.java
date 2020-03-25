@@ -1,4 +1,4 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Fragments;
 
 import android.os.Bundle;
 
@@ -8,13 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.swankapps.corona.preventcorona.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class SaveFeedFragment extends Fragment {
 
-    public LoginFragment() {
+    public SaveFeedFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,6 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View lv = inflater.inflate(R.layout.fragment_login, container, false);
-        return lv;
+        return inflater.inflate(R.layout.fragment_save_feed, container, false);
     }
 }

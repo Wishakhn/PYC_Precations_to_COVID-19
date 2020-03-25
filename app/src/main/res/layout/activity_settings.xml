@@ -7,7 +7,7 @@
     android:weightSum="10"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".SettingsActivity">
+    tools:context=".Activities.SettingsActivity">
 <include layout="@layout/custom_toolbar"
     android:layout_width="match_parent"
     android:layout_height="0dp"

@@ -1,10 +1,12 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.swankapps.corona.preventcorona.R;
 
 public class AuthOptions extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.swankapps.corona.preventcorona.Model.Item;
+import com.swankapps.corona.preventcorona.R;
 
 import java.util.List;
 

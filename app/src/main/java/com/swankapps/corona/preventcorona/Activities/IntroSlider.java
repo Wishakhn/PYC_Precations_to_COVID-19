@@ -1,4 +1,4 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -11,6 +11,11 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+
+import com.swankapps.corona.preventcorona.Adapter.Adapter;
+import com.swankapps.corona.preventcorona.Model.Item;
+import com.swankapps.corona.preventcorona.R;
+import com.swankapps.corona.preventcorona.Helpers.preferenceClass;
 
 import java.util.ArrayList;
 import java.util.List;

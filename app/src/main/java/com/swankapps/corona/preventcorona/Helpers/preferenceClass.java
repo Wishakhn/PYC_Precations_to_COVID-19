@@ -1,4 +1,4 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ public class preferenceClass {
     public preferenceClass(Context context) {
         this.context = context;
     }
-    void initPreference (){
+    public void initPreference(){
         sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME,PREFS_MODE);
 
 

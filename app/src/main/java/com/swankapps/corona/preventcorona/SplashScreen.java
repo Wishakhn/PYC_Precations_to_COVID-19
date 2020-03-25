@@ -8,6 +8,10 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.swankapps.corona.preventcorona.Activities.IntroSlider;
+import com.swankapps.corona.preventcorona.Activities.MainActivity;
+import com.swankapps.corona.preventcorona.Helpers.preferenceClass;
+
 public class SplashScreen extends AppCompatActivity {
 Handler handler;
 preferenceClass preference;

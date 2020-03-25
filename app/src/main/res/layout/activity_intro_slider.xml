@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".IntroSlider">
+    tools:context=".Activities.IntroSlider">
 
     <View
         android:layout_width="match_parent"

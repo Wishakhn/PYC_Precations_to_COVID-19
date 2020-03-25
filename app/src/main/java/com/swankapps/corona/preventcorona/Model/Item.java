@@ -1,4 +1,4 @@
-package com.swankapps.corona.preventcorona;
+package com.swankapps.corona.preventcorona.Model;
 
 /**
  * Created by yarolegovich on 07.03.2017.
