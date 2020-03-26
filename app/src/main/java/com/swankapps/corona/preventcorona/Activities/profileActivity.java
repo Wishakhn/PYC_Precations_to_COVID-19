@@ -4,13 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.swankapps.corona.preventcorona.BaseAtivity;
 import com.swankapps.corona.preventcorona.R;
 
-public class profileActivity extends AppCompatActivity {
+public class profileActivity extends BaseAtivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+    public void initViews(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_profile;
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void setToolbar() {
+
+    }
+
+    @Override
+    public void hideStatusbar() {
+
     }
 }

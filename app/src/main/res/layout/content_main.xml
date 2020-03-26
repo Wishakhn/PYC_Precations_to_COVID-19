@@ -18,10 +18,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:src="@drawable/profile_image2" />
 
         <TextView
@@ -33,18 +33,22 @@
             android:fontFamily="@font/iowan_old_style_roman"
             android:text="Good Morning !!"
             android:textColor="@color/titletext_white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_below="@+id/greetingtext"
             android:fontFamily="@font/helvetica_neue_light"
             android:text="User Name here"
+            android:gravity="top"
+            android:layout_marginStart="10dp"
             android:textColor="@color/titletext_white"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            />
 
         <ImageView
+            android:id="@+id/shownavigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

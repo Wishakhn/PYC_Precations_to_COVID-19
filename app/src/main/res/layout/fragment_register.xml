@@ -46,7 +46,7 @@
                 android:textColorHint="@color/grey"
                 android:hint="Full Name"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -79,7 +79,7 @@
                 android:textColorHint="@color/grey"
                 android:hint="example@email,com"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -115,7 +115,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -151,7 +151,7 @@
                 android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -187,7 +187,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -223,7 +223,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -259,7 +259,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -269,7 +269,7 @@
             android:layout_below="@+id/pass_conatiner"
             android:background="@color/grey"/>
         <ImageButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/regbtn2"
@@ -278,13 +278,15 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"/>
         <TextView
+            android:id="@+id/logintext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? Login."
-            android:layout_below="@+id/btn_login"
+            android:layout_below="@+id/btn_reg"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/helvetica_neue_medium"
+            android:fontFamily="@font/arial"
             android:textSize="15sp"
+            android:layout_marginBottom="30dp"
             android:textColor="#1249FC"/>
     </LinearLayout>
 

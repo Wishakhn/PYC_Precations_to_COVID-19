@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.PrecautionActivity"></activity>
         <activity android:name=".Activities.Myths_Realities" />
         <activity android:name=".Activities.Remidy_PrecatuionActivity" />
         <activity android:name=".Activities.SymptomsActivity" />

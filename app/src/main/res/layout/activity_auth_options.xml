@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
 android:src="@drawable/applogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         />
     <ImageButton
         android:id="@+id/logbtn"
@@ -20,7 +20,9 @@ android:src="@drawable/applogo"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logoimage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="30dp"
+        android:onClick="UserAuthOptionHandler"
         android:src="@drawable/log_btn"
         android:background="@null"/>
     <ImageButton
@@ -30,5 +32,6 @@ android:src="@drawable/applogo"
         android:src="@drawable/reg_btn"
         android:layout_centerInParent="true"
         android:layout_below="@+id/logbtn"
+        android:onClick="UserAuthOptionHandler"
         android:background="@null"/>
 </RelativeLayout>

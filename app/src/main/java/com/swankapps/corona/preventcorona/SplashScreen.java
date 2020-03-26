@@ -8,22 +8,44 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.swankapps.corona.preventcorona.Activities.AuthOptions;
 import com.swankapps.corona.preventcorona.Activities.IntroSlider;
 import com.swankapps.corona.preventcorona.Activities.MainActivity;
+import com.swankapps.corona.preventcorona.Helpers.CommonMethods;
 import com.swankapps.corona.preventcorona.Helpers.preferenceClass;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends BaseAtivity {
 Handler handler;
 preferenceClass preference;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        hide_statusbar();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+    public void initViews(Bundle savedInstanceState) {
         handler = new Handler();
         preference = new preferenceClass(SplashScreen.this);
         preference.initPreference();
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_splash_screen;
+    }
+
+    @Override
+    public void setListener() {
         startSplashing();
+    }
+
+    @Override
+    public void setToolbar() {
+
+//Required
+    }
+
+    @Override
+    public void hideStatusbar() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void startSplashing() {
@@ -31,23 +53,17 @@ preferenceClass preference;
           @Override
           public void run() {
               if (!preference.isFirstRun()){
-                  intentHandler(IntroSlider.class);
+                  CommonMethods.intentHandler(SplashScreen.this,IntroSlider.class);
+                  finish();
               }
               else{
-                  intentHandler(MainActivity.class);
+                  CommonMethods.intentHandler(SplashScreen.this, AuthOptions.class);
+                  finish();
               }
           }
       },2500);
     }
 
-    private void intentHandler(Class target) {
-        Intent move = new Intent(SplashScreen.this, target);
-        startActivity(move);
-        finish();
-    }
-    void hide_statusbar() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
+
+
 }

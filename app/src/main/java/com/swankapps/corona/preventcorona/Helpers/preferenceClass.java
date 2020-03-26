@@ -26,7 +26,7 @@ public class preferenceClass {
         editor.putBoolean(KEY_FIRST_RUN,isFirstRun);
         editor.apply();
     }
-    boolean  isFirstRun (){
+    public boolean  isFirstRun(){
         boolean firstRun = sharedPrefs.getBoolean(KEY_FIRST_RUN,false);
         return firstRun;
     }

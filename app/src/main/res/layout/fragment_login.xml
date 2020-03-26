@@ -50,7 +50,7 @@
                 android:textColorHint="@color/grey"
                 android:hint="example@email,com"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -86,7 +86,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/arial"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -116,6 +116,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"/>
         <TextView
+            android:id="@+id/registerFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account? Register."

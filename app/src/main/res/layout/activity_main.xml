@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
+    android:id="@+id/dLayout"
     tools:openDrawer="end">
     <include layout="@layout/content_main"/>
     <com.google.android.material.navigation.NavigationView
