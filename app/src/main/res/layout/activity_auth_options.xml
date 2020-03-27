@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="60dp"
     tools:context=".Activities.AuthOptions">
     <ImageView
         android:id="@+id/logoimage"
@@ -14,24 +16,59 @@ android:src="@drawable/applogo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         />
-    <ImageButton
+    <androidx.cardview.widget.CardView
         android:id="@+id/logbtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logoimage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="5dp"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/btn_zinc"
         android:onClick="UserAuthOptionHandler"
-        android:src="@drawable/log_btn"
-        android:background="@null"/>
-    <ImageButton
+        android:background="@null">
+        <TextView
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_neue_light"
+            android:textSize="18sp"
+
+            android:text="LOGIN"
+            android:textColor="@color/titletext_white"
+            />
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:id="@+id/regbtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/reg_btn"
         android:layout_centerInParent="true"
         android:layout_below="@+id/logbtn"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="5dp"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/btn_purple"
         android:onClick="UserAuthOptionHandler"
-        android:background="@null"/>
+        android:background="@null">
+        <TextView
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_neue_light"
+            android:textSize="18sp"
+            android:text="REGISTER"
+            android:textColor="@color/titletext_white"
+            />
+
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

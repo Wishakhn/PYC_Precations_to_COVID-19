@@ -3,6 +3,7 @@ package com.swankapps.corona.preventcorona.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,13 +26,20 @@ public class CovidIntro extends BaseAtivity {
         return R.layout.activity_covid_intro;
     }
 
+
     @Override
     public void setListener() {
-
+        backgo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeScreen(CovidIntro.this,MainActivity.class);
+            }
+        });
     }
 
     @Override
     public void setToolbar() {
+        backtext.setText("COVID-19");
 
     }
 

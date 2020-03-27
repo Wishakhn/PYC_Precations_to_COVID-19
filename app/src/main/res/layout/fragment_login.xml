@@ -34,6 +34,7 @@
             android:gravity="center"
             android:weightSum="6">
             <ImageView
+                android:id="@+id/log_mailicon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -41,6 +42,7 @@
                 android:src="@drawable/mail"/>
 
             <EditText
+                android:id="@+id/logmailedit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.2"
@@ -55,6 +57,7 @@
 
         </LinearLayout>
         <View
+            android:id="@+id/log_mailview"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/email_conatiner"
@@ -68,6 +71,7 @@
             android:gravity="center"
             android:weightSum="6">
             <ImageView
+                android:id="@+id/log_passicon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -75,13 +79,14 @@
                 android:src="@drawable/lock"/>
 
             <EditText
+                android:id="@+id/log_passedit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.2"
                 android:background="@null"
                 android:textColorHint="@color/grey"
                 android:hint="*******"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
                 android:gravity="center_vertical"
                 android:inputType="textPassword"
                 android:singleLine="true"
@@ -91,6 +96,7 @@
 
         </LinearLayout>
         <View
+            android:id="@+id/log_passview"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/pass_conatiner"

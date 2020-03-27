@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="there should be some details writtern herethere should be some details writtern herethere should be some details writtern herethere should be some details writtern herethere should be some details writtern herethere should be some details writtern herethere should be some details writtern here"
             android:layout_below="@+id/cardtitile"
-            android:fontFamily="@font/helvetica_neue_light"
+            android:fontFamily="@font/helvetica_neue_medium"
+            android:justificationMode="inter_word"
             android:textColor="@color/descriptext_grey"/>
        <RelativeLayout
            android:id="@+id/containerdetails"
@@ -49,23 +50,26 @@
                android:layout_marginBottom="10dp"
                android:fontFamily="@font/helvetica_neue_medium"
                android:textColor="@color/titletext_black"
-               android:textSize="14sp"/>
+               android:textSize="15sp"/>
            <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/childcycler"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                tools:itemCount="3"
+               tools:listitem="@layout/item_child"
                android:layout_below="@+id/tips"/>
        </RelativeLayout>
 
 <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/display"
+    android:layout_width="17dp"
+    android:layout_height="17dp"
     android:src="@drawable/downarrow_unselected"
     android:layout_alignParentEnd="true"
-    android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"/>
 
         <RatingBar
+            android:id="@+id/reviewrating"
             android:layout_alignBottom="@+id/savebtn"
             android:layout_marginTop="15dp"
             style="?android:attr/ratingBarStyleSmall"
@@ -93,6 +97,7 @@
             app:cardElevation="4dp"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/savetext"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="8dp"
                 android:layout_width="wrap_content"

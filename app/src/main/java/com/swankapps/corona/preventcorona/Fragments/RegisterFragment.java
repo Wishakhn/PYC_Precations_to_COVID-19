@@ -64,6 +64,8 @@ public class RegisterFragment extends Fragment {
         fragmentTransaction.replace(R.id.container_authfragment, fragment2);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        TextView textLabel = getActivity().findViewById(R.id.labelfragment);
+        textLabel.setText("Login");
     }
 
     void underline(TextView text) {

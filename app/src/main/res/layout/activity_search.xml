@@ -16,13 +16,17 @@
     android:layout_height="0dp"
     android:layout_weight="9.1">
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchCycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_feeds"/>
     <LinearLayout
+        android:id="@+id/scontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:visibility="gone"
+
         android:background="@color/toolbar">
 
         <SearchView
@@ -31,7 +35,6 @@
             android:layout_height="wrap_content"
             android:queryHint="Search here . . . ."
             android:iconifiedByDefault="false"
-            android:visibility="gone"
             android:closeIcon="@drawable/no_blue"
             android:searchIcon="@drawable/search_blue"
             android:queryBackground="@null"
