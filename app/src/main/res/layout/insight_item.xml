@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-
+        android:textSize="15sp"
         android:textColor="@color/titletext_white"
         android:fontFamily="@font/iowan_old_style_roman"
         android:text="Title:"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="5dp"
         android:textColor="@color/titletext_white"
-        android:fontFamily="@font/helvetica_neue_light"
+        android:fontFamily="@font/arial"
         android:text="hello hello \n Daily news about survivor
 s of COVID-19 "/>
 </LinearLayout>

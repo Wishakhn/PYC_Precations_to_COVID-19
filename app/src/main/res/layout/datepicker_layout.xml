@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:id="@+id/date_picker"
+    android:layout_gravity="center"
+    android:elevation="5dp"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:targetApi="lollipop">
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingStart="10dp"
+           android:paddingEnd="10dp"
+           android:orientation="vertical">
+           <DatePicker android:id="@+id/datePicker1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               style="@style/MyDatePickerStyle"
+               android:theme="@style/MyDatePickerSpinnerStyle"/>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingBottom="10dp"
+               android:paddingTop="10dp"
+
+               >
+
+               <androidx.cardview.widget.CardView
+                   android:id="@+id/no_date"
+                   android:layout_width="wrap_content"
+                   android:layout_height="45dp"
+                   android:layout_alignParentStart="true"
+                   android:layout_centerInParent="true"
+                   app:cardBackgroundColor="@color/btn_zinc"
+                   app:cardCornerRadius="2dp"
+                   app:cardUseCompatPadding="true">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:paddingEnd="10dp"
+                       android:paddingStart="10dp"
+                       android:text="@string/c_a_n_c_e_l"
+                       android:textSize="17sp"
+                       android:fontFamily="@font/helvetica_neue_light"
+                       android:textColor="@color/titletext_white" />
+               </androidx.cardview.widget.CardView>
+
+               <androidx.cardview.widget.CardView
+                   android:id="@+id/pick_date"
+                   android:layout_width="wrap_content"
+                   android:layout_height="45dp"
+                   android:layout_alignParentEnd="true"
+                   android:layout_centerInParent="true"
+                   app:cardBackgroundColor="@color/btn_purple"
+                   app:cardCornerRadius="2dp"
+                   app:cardUseCompatPadding="true"
+                   tools:ignore="RelativeOverlap">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:paddingEnd="14dp"
+                       android:paddingStart="14dp"
+                       android:text="@string/done"
+                       android:textSize="17sp"
+                       android:fontFamily="@font/helvetica_neue_light"
+                       android:textColor="@color/titletext_white" />
+               </androidx.cardview.widget.CardView>
+           </RelativeLayout>
+
+       </LinearLayout>
+    </androidx.cardview.widget.CardView>

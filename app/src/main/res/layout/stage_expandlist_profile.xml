@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionHeader
+        android:id="@+id/genderHeaderP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:expansion_headerIndicator="@id/indecator_stage"
+        app:expansion_layout="@id/user_liststage"
+        app:expansion_toggleOnClick="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:weightSum="6">
+            <ImageView
+                android:id="@+id/sageicon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:scaleType="fitStart"
+                android:src="@drawable/user_state"/>
+
+            <EditText
+                android:id="@+id/stageedit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.7"
+                android:background="@null"
+                android:textColorHint="@color/grey"
+                android:hint="Current Stage"
+                android:imeOptions="actionNext"
+                android:enabled="false"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/descriptext_zinc"
+                android:fontFamily="@font/arial"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/indecator_stage"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_weight="0.5"
+                android:scaleType="fitEnd"
+                android:src="@drawable/sidearrow"/>
+
+        </LinearLayout>
+
+    </com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionHeader>
+
+    <com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionLayout
+        android:id="@+id/user_liststage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:expansion_expanded="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/stage1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/arial"
+                    android:onClick="select_gender_profile"
+                    android:text="@string/clerified"
+                    android:textColor="@color/descriptext_zinc"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/stage2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/arial"
+                    android:text="@string/Safe"
+                    android:textColor="@color/descriptext_zinc"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/stage3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
+                    android:gravity="center_vertical"
+                    android:text="@string/infected"
+                    android:fontFamily="@font/arial"
+                    android:onClick="select_gender_profile"
+                    android:textColor="@color/descriptext_zinc"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/stage4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/arial"
+                    android:onClick="select_gender_profile"
+                    android:text="@string/svereill"
+                    android:textColor="@color/descriptext_zinc"
+                    android:textSize="17sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/stage5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/arial"
+                    android:onClick="select_gender_profile"
+                    android:text="@string/survior"
+                    android:textColor="@color/descriptext_zinc"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionLayout>
+</LinearLayout>

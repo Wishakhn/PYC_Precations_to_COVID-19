@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_below="@+id/greetingtext"
-            android:fontFamily="@font/helvetica_neue_light"
+            android:fontFamily="@font/arial"
             android:text="User Name here"
             android:gravity="top"
             android:layout_marginStart="10dp"
@@ -100,16 +100,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/helvetica_neue_medium"
                 android:text="RISK"
                 android:textColor="@color/titletext_black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/helvetica_neue_light"
-                android:text="10%"
-                android:textColor="@color/titletext_black" />
+                android:textColor="@color/descriptext_grey"
+                android:fontFamily="@font/helvetica_neue_medium"                android:text="10%"
+                 />
 
         </LinearLayout>
 
@@ -124,16 +124,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:fontFamily="@font/helvetica_neue_medium"
                 android:text="SURVIVAL CHANCES"
                 android:textColor="@color/titletext_black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/helvetica_neue_light"
+                android:textColor="@color/descriptext_grey"
+                android:fontFamily="@font/helvetica_neue_medium"
                 android:text="90%"
-                android:textColor="@color/titletext_black" />
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -178,14 +179,14 @@
                     android:layout_weight="2"
                     android:textColor="@color/titletext_black"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:text="Country:"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textColor="@color/titletext_black"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:textColor="@color/descriptext_grey"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:layout_weight="3"
                     android:text="Pakistan"/>
             </LinearLayout>
@@ -201,15 +202,15 @@
                     android:layout_weight="2"
                     android:gravity="center_vertical"
                     android:textColor="@color/titletext_black"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:text="Effected Cities:"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:layout_weight="3"
-                    android:textColor="@color/titletext_black"
+                    android:textColor="@color/descriptext_grey"
                     android:text="Lahore, Islamabad"/>
             </LinearLayout>
             <LinearLayout
@@ -224,15 +225,15 @@
                     android:layout_weight="2"
                     android:gravity="center_vertical"
                     android:textColor="@color/titletext_black"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:text="Survivors:"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:layout_weight="3"
-                    android:textColor="@color/titletext_black"
+                    android:textColor="@color/descriptext_grey"
                     android:text="3400"/>
             </LinearLayout>
             <LinearLayout
@@ -246,15 +247,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:textColor="@color/titletext_black"
                     android:text="Victims:"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/helvetica_neue_light"
-                    android:textColor="@color/titletext_black"
+                    android:fontFamily="@font/helvetica_neue_medium"
+                    android:textColor="@color/descriptext_grey"
                     android:layout_weight="3"
                     android:text="4000"/>
             </LinearLayout>
@@ -270,14 +271,14 @@
                     android:layout_weight="2"
                     android:gravity="center_vertical"
                     android:textColor="@color/titletext_black"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:text="Casualties:"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textColor="@color/titletext_black"
-                    android:fontFamily="@font/helvetica_neue_light"
+                    android:textColor="@color/descriptext_grey"
+                    android:fontFamily="@font/helvetica_neue_medium"
                     android:layout_weight="3"
                     android:text="600"/>
             </LinearLayout>

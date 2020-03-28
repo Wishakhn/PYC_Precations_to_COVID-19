@@ -9,39 +9,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/blogerthumb"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/profile_image"/>
+
         <TextView
             android:id="@+id/articleby"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Article By:"
-            android:textColor="@color/grey"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/blogerthumb"
-            android:layout_marginLeft="10dp"/>
+            android:text="Article By:"
+            android:textSize="12dp"
+            android:textColor="@color/grey" />
         <TextView
+            android:id="@+id/bloggername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DR. Jhon Andrew"
             android:layout_below="@+id/articleby"
             android:textColor="@color/titletext_black"
             android:fontFamily="@font/iowan_old_style_roman"
-            android:textSize="17sp"
+            android:textSize="14sp"
             android:layout_toRightOf="@+id/blogerthumb"
             android:layout_marginLeft="10dp"/>
     </RelativeLayout>
     <TextView
+        android:id="@+id/blogtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="WHAT IS CORONAVIRUS COVID-19?"
         android:fontFamily="@font/iowan_old_style_roman"
-        android:textSize="19sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginTop="25dp"
@@ -49,12 +52,17 @@
 
         />
     <TextView
+        android:id="@+id/blogdescrip"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:paddingHorizontal="10dp"
+        android:textSize="14dp"
         android:text="Some Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theorySome Symptoms theory"/>
     
 <RelativeLayout
+    android:id="@+id/readblogbtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingVertical="7dp">

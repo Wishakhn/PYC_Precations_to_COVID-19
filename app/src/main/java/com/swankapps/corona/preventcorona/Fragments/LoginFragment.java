@@ -2,6 +2,7 @@ package com.swankapps.corona.preventcorona.Fragments;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,6 +33,8 @@ ImageView log_mailicon;
     ImageView log_passicon;
     View log_passview;
     View log_mailview;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,16 +51,8 @@ ImageView log_mailicon;
 
         logmailedit.addTextChangedListener(mailListener);
         log_passedit.addTextChangedListener(passListener);
-        log_passedit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    CommonMethods.unselectLayout(getContext(),log_passicon,log_passview,R.drawable.lock);
-                }
-                return false;
-            }
-        });
-        ImageButton btn_login = lv.findViewById(R.id.btn_login);
+        log_passedit.setOnEditorActionListener(passDoneLisnter);
+        CardView btn_login = lv.findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +68,15 @@ ImageView log_mailicon;
         return lv;
 
     }
+    private TextView.OnEditorActionListener passDoneLisnter = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT){
+                CommonMethods.unselectLayout(getContext(),log_passicon,log_passview,R.drawable.lock);
+            }
+            return false;
+        }
+    };
     private TextWatcher mailListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

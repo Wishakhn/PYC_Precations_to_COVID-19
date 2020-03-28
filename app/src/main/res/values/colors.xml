@@ -20,4 +20,5 @@
     <color name="dense_blue">#0B4462</color>
     <color name="grey">#898E8E</color>
     <color name="magenta">#6C4F6A</color>
+    <color name="errorcolor">#DD0C0C</color>
 </resources>
