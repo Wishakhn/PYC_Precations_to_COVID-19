@@ -17,6 +17,9 @@ public class blogs {
         this.url = url;
     }
 
+    public blogs() {
+    }
+
     public int getImage() {
         return image;
     }

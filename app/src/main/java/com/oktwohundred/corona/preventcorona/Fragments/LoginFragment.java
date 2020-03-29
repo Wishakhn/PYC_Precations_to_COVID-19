@@ -214,6 +214,7 @@ public class LoginFragment extends Fragment {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                CommonMethods.hideProgressDialog();
                 if (task.isSuccessful()) {
                     FirebaseUser fUser = auth.getCurrentUser();
                     assert fUser != null;
@@ -247,7 +248,7 @@ public class LoginFragment extends Fragment {
         firebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CommonMethods.hideProgressDialog();
+
                 User modelUser = dataSnapshot.getValue(User.class);
                 String userId = modelUser.getFirebaseId();
                 String name = modelUser.getUserName();

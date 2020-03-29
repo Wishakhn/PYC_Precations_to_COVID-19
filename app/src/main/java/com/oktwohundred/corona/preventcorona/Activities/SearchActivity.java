@@ -1,5 +1,6 @@
 package com.oktwohundred.corona.preventcorona.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -7,9 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.Adapter.feedsAdapter;
 import com.oktwohundred.corona.preventcorona.BaseAtivity;
 import com.oktwohundred.corona.preventcorona.Model.feeds;
@@ -30,6 +37,8 @@ public class SearchActivity extends BaseAtivity {
     RecyclerView searchCycler;
     feedsAdapter fAdapter;
     List<feeds> feedItems;
+    ProgressBar progressloader;
+    TextView errormessage;
 
     @Override
     public void initViews(Bundle savedInstanceState) {
@@ -40,6 +49,8 @@ public class SearchActivity extends BaseAtivity {
         backgo = findViewById(R.id.backgo);
         searchgo = findViewById(R.id.searchgo);
         searchView = findViewById(R.id.searchView);
+        errormessage = findViewById(R.id.errormessage);
+        progressloader = findViewById(R.id.progressloader);
         searchCycler = findViewById(R.id.searchCycler);
         searchCycler.setLayoutManager(new LinearLayoutManager(SearchActivity.this, LinearLayoutManager.VERTICAL, false));
         feedItems = new ArrayList<>();
@@ -61,7 +72,7 @@ public class SearchActivity extends BaseAtivity {
                 closeScreen(SearchActivity.this,MainActivity.class);
             }
         });
-        loadAllRemedies();
+        loadAllFeeds();
         searchgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,25 +93,44 @@ public class SearchActivity extends BaseAtivity {
         backtext.setText("SEARCH");
 
     }
-    private void loadAllRemedies() {
+    private void loadAllFeeds() {
         feedItems.clear();
-        feedItems.add(new feeds("remedy", "Ginger Tea", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", 3.5f, false));
-        feedItems.add(new feeds("remedy", "Cure is  Tea", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", 4f, false));
-        feedItems.add(new feeds("precaution", "Stay home if you can.", "", "You can do your part to help your community and the world. Do not get close to other people.\n" +
-                "\n" + "This is called “social distancing” or “physical distancing,” and is basically a call to stand far away from other people. Experts believe the coronavirus travels through droplets, so limiting your exposure to other people is a good way to protect yourself.", 3.5f, false));
-        feedItems.add(new feeds("remedy", "Hot Tea", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", 5.0f, false));
+        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("NewsFeeds");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressloader.setVisibility(View.GONE);
+                if (dataSnapshot.getValue() != null){
+                    for (DataSnapshot shots : dataSnapshot.getChildren()){
+                        feeds remedies = shots.getValue(feeds.class);
+                        String feedtype = remedies.getFeedType();
+                        String feedid = remedies.getFeedId();
+                        String feedname = remedies.getFeedName();
+                        String feedintro = remedies.getFeedIntro();
+                        String feeddescrip = remedies.getFeedDescrip() ;
+                        float feedrating = remedies.getFeedRating();
+                        boolean isSaved = remedies.isSaved();
+                        feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
+                        feedItems.add(model);
+                    }
+                    searchCycler.setAdapter(fAdapter);
+                    fAdapter.notifyDataSetChanged();
+                }
+                else {
+                    errormessage.setText("No Remedies here");
+                    errormessage.setVisibility(View.VISIBLE);
+                }
 
-        feedItems.add(new feeds("precaution","Wash your hands. With soap. Then wash them again.","","A refresher: Wet your hands and scrub them with soap, taking care to get between your fingers and under your nails. Wash for at least 20 seconds (or about the time it takes to sing “Happy Birthday” twice), and dry. Make sure you get your thumbs, too. The C.D.C. also recommends you avoid touching your eyes, nose and mouth with unwashed hands (tough one, we know).", 4.4f, false));
-        feedItems.add(new feeds("remedy", "Herbal Tea", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", 2.5f, false));
+            }
 
-        feedItems.add(new feeds("precaution","Don’t stockpile masks.","","Face masks have become a symbol of coronavirus, but stockpiling them might do more harm than good.\n" +
-                "\n" +
-                "First, they don’t do much to protect you. Most surgical masks are too loose to prevent inhalation of the virus.", 5.0f, false));
-        feedItems.add(new feeds("precaution","If surfaces are dirty, clean them","","use detergent or soap and water prior to disinfection. Full information on how to disinfect found here.", 3.5f, false));
-        feedItems.add(new feeds("remedy", "Good Tea", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", "Ever had real, fresh ginger tea? It’s soothing and invigorating at the same time. Ginger tea has been consumed for centuries, and yet it has only recently crossed my radar. I love it!", 2f, false));
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        searchCycler.setAdapter(fAdapter);
-        fAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+
     }
     @Override
     public void hideStatusbar() {

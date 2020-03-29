@@ -1,6 +1,7 @@
 package com.oktwohundred.corona.preventcorona.Adapter;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.Model.child;
 import com.oktwohundred.corona.preventcorona.Model.feeds;
 import com.oktwohundred.corona.preventcorona.R;
@@ -49,15 +55,17 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
         String descript = model.getFeedDescrip();
         float rating = model.getFeedRating();
         boolean saved = model.isSaved();
+        String id = model.getFeedId();
         if (feedtype.equalsIgnoreCase("remedy")){
             holder.display.setVisibility(View.VISIBLE);
-            getallchilds();
+            getallchilds(id);
             holder.childcycler.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
         }
         else {
             holder.display.setVisibility(View.GONE);
         }
+
         holder.cardtitile.setText(title);
         holder.cardescrip.setText(descript);
         holder.reviewrating.setRating(rating);
@@ -77,13 +85,30 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
 
     }
 
-    private void getallchilds() {
+    private void getallchilds(final String id) {
         childItem.clear();
-        childItem.add(new child("Water","4 cups"));
-        childItem.add(new child("Ginger","2 tbs"));
-        childItem.add(new child("Mint","4 leaves"));
-        childItem.add(new child("Honney","4 tbs"));
-        cAdapter.notifyDataSetChanged();
+        DatabaseReference  firebaseRef = FirebaseDatabase.getInstance().getReference("NewsFeeds").child(id).child("Ings");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             if (dataSnapshot.exists()){
+                 for (DataSnapshot shots : dataSnapshot.getChildren()){
+                     child cmodel = shots.getValue(child.class);
+                     String name = cmodel.getChildName();
+                     String measure = cmodel.getChildDescrip();
+                     child model = new child(name,measure);
+                     childItem.add(model);
+                 }
+                 cAdapter.notifyDataSetChanged();
+             }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.oktwohundred.corona.preventcorona.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.oktwohundred.corona.preventcorona.Model.child;
 import com.oktwohundred.corona.preventcorona.Model.feeds;
 import com.oktwohundred.corona.preventcorona.R;
 import com.oktwohundred.corona.preventcorona.Adapter.feedsAdapter;
@@ -26,7 +35,8 @@ public class PrecautionFragment extends Fragment {
     RecyclerView precCycler;
     feedsAdapter fadapter;
     List<feeds> feedItems;
-
+    ProgressBar progressloader;
+    TextView errormessage;
     public PrecautionFragment() {
         // Required empty public constructor
     }
@@ -38,6 +48,8 @@ public class PrecautionFragment extends Fragment {
         // Inflate the layout for this fragment
         View pv = inflater.inflate(R.layout.fragment_precaution, container, false);
         precCycler = pv.findViewById(R.id.precCycler);
+        errormessage = pv.findViewById(R.id.errormessage);
+        progressloader = pv.findViewById(R.id.progressloader);
         precCycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         feedItems = new ArrayList<>();
         fadapter = new feedsAdapter(getContext(), feedItems);
@@ -48,14 +60,41 @@ public class PrecautionFragment extends Fragment {
 
     private void loadAllPrecautions() {
         feedItems.clear();
-        feedItems.add(new feeds("precaution", "Stay home if you can.", "", "You can do your part to help your community and the world. Do not get close to other people.\n" +
-                "\n" + "This is called “social distancing” or “physical distancing,” and is basically a call to stand far away from other people. Experts believe the coronavirus travels through droplets, so limiting your exposure to other people is a good way to protect yourself.", 3.5f, false));
-        feedItems.add(new feeds("precaution","Wash your hands. With soap. Then wash them again.","","A refresher: Wet your hands and scrub them with soap, taking care to get between your fingers and under your nails. Wash for at least 20 seconds (or about the time it takes to sing “Happy Birthday” twice), and dry. Make sure you get your thumbs, too. The C.D.C. also recommends you avoid touching your eyes, nose and mouth with unwashed hands (tough one, we know).", 4.4f, false));
-        feedItems.add(new feeds("precaution","Don’t stockpile masks.","","Face masks have become a symbol of coronavirus, but stockpiling them might do more harm than good.\n" +
-                "\n" +
-                "First, they don’t do much to protect you. Most surgical masks are too loose to prevent inhalation of the virus.", 5.0f, false));
-        feedItems.add(new feeds("precaution","If surfaces are dirty, clean them","","use detergent or soap and water prior to disinfection. Full information on how to disinfect found here.", 3.5f, false));
-        precCycler.setAdapter(fadapter);
-        fadapter.notifyDataSetChanged();
+        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("NewsFeeds");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressloader.setVisibility(View.GONE);
+                if (dataSnapshot.getValue() != null){
+                    for (DataSnapshot shots : dataSnapshot.getChildren()){
+                        feeds precautions = shots.getValue(feeds.class);
+
+                        String feedtype = precautions.getFeedType();
+                        if (feedtype.equalsIgnoreCase("precaution")){
+                            String feedid = precautions.getFeedId();
+                            String feedname = precautions.getFeedName();
+                            String feedintro = precautions.getFeedIntro();
+                            String feeddescrip = precautions.getFeedDescrip() ;
+                            float feedrating = precautions.getFeedRating();
+                            boolean isSaved = precautions.isSaved();
+                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
+                            feedItems.add(model);
+                        }
+                    }
+                    precCycler.setAdapter(fadapter);
+                    fadapter.notifyDataSetChanged();
+                }
+                else {
+                    errormessage.setText("No Precaution Found");
+                    errormessage.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

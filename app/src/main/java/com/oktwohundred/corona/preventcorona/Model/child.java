@@ -9,6 +9,9 @@ public class child {
         this.childDescrip = childDescrip;
     }
 
+    public child() {
+    }
+
     public String getChildName() {
         return childName;
     }

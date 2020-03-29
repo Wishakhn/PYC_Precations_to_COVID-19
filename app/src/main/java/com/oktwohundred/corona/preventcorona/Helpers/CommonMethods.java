@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -80,6 +81,14 @@ public class CommonMethods {
         }
     }
 
+
+    public static String getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "UserImage", null);
+        return path;
+    }
+
     /**************************    Progress Dialog   ****************************/
     public static void displayProgressDialog(Context context, String msg) {
         pDialog = new ProgressDialog(context, R.style.AppCompatAlertDialogStyle);
@@ -93,6 +102,8 @@ public class CommonMethods {
     public static void hideProgressDialog() {
         pDialog.dismiss();
     }
+
+
 
     /**************************    Handle Editor    ****************************/
 

@@ -15,6 +15,9 @@ public class savedfeeds {
         this.feedRating = feedRating;
     }
 
+    public savedfeeds() {
+    }
+
     public String getFeedType() {
         return feedType;
     }

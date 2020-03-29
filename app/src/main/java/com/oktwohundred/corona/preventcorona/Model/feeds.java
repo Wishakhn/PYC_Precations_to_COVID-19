@@ -1,6 +1,7 @@
 package com.oktwohundred.corona.preventcorona.Model;
 
 public class feeds {
+    String feedId;
     String feedType;
     String feedName;
     String feedIntro;
@@ -8,13 +9,25 @@ public class feeds {
     float feedRating;
     boolean isSaved;
 
-    public feeds(String feedType, String feedName, String feedIntro, String feedDescrip, float feedRating, boolean isSaved) {
+    public feeds(String feedId, String feedType, String feedName, String feedIntro, String feedDescrip, float feedRating, boolean isSaved) {
+        this.feedId = feedId;
         this.feedType = feedType;
         this.feedName = feedName;
         this.feedIntro = feedIntro;
         this.feedDescrip = feedDescrip;
         this.feedRating = feedRating;
         this.isSaved = isSaved;
+    }
+
+    public feeds() {
+    }
+
+    public String getFeedId() {
+        return feedId;
+    }
+
+    public void setFeedId(String feedId) {
+        this.feedId = feedId;
     }
 
     public String getFeedType() {

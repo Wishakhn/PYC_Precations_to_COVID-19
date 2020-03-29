@@ -1,17 +1,23 @@
 package com.oktwohundred.corona.preventcorona.Model;
 
 public class insights {
+
     String type;
     String title;
     String descrip;
     String url;
 
-    public insights(String type, String title, String descrip, String url) {
+    public insights( String type, String title, String descrip, String url) {
         this.type = type;
         this.title = title;
         this.descrip = descrip;
         this.url = url;
     }
+
+    public insights() {
+    }
+
+
 
     public String getUrl() {
         return url;

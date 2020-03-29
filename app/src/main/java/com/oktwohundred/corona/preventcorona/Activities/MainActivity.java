@@ -1,13 +1,11 @@
 package com.oktwohundred.corona.preventcorona.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +15,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
+
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.Adapter.insightAdapter;
 import com.oktwohundred.corona.preventcorona.BaseAtivity;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
-import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.insights;
 import com.oktwohundred.corona.preventcorona.R;
@@ -33,7 +35,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.PYC_LOG;
 import static com.oktwohundred.corona.preventcorona.Helpers.LocaleManager.getLocale;
 
@@ -59,7 +60,8 @@ public class MainActivity extends BaseAtivity {
     CircleImageView user_image;
     ProgressBar progressloader;
     TextView errormessage;
-
+    FirebaseAuth auth;
+    DatabaseReference firebaseRef;
 
 
 
@@ -67,7 +69,7 @@ public class MainActivity extends BaseAtivity {
     public void initViews(Bundle savedInstanceState) {
         getLocale(getResources());
         database = new DbManager(MainActivity.this);
-
+        auth = FirebaseAuth.getInstance();
         errormessage = findViewById(R.id.errormessage);
         progressloader = findViewById(R.id.progressloader);
         user_image = findViewById(R.id.user_image);
@@ -82,21 +84,13 @@ public class MainActivity extends BaseAtivity {
         Log.i(PYC_LOG,"User name is "+uname);
         usernametitle.setText(uname);
         String imgBase64 = ""+database.getUserData().getUserImage();
-        if (CommonMethods.IsBase64Encoded(imgBase64)){
-            imgBase64 = CommonMethods.deCode(imgBase64);
-
+        if (imgBase64.equalsIgnoreCase("default") || imgBase64.isEmpty()){
+            Glide.with(MainActivity.this).load(R.drawable.profile_image2).into(user_image);
         }
-        Glide.with(MainActivity.this).load(imgBase64).into(user_image);
-        /*Glide.with(MainActivity.this).asBitmap().load(imgBase64).into(new CustomTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                user_image.setImageBitmap(resource);
-            }
+        else {
+            Glide.with(MainActivity.this).load(imgBase64).into(user_image);
+        }
 
-            @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
-            }
-        });*/
         closedrawer_btn = findViewById(R.id.closedrawer_btn);
         openProfile = findViewById(R.id.openProfile);
         openSearch = findViewById(R.id.openSearch);
@@ -132,16 +126,41 @@ public class MainActivity extends BaseAtivity {
     }
 
     private void loadInsights() {
-        progressloader.setVisibility(View.GONE);
         insItems.clear();
-        insItems.add(new insights("research", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insItems.add(new insights("news", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insItems.add(new insights("research", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insItems.add(new insights("news", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insItems.add(new insights("news", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insItems.add(new insights("research", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
-        insCycler.setAdapter(iAdapter);
-        iAdapter.notifyDataSetChanged();
+        firebaseRef = FirebaseDatabase.getInstance().getReference("Insights");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressloader.setVisibility(View.GONE);
+               if (dataSnapshot.exists()){
+                   for (DataSnapshot shots : dataSnapshot.getChildren()){
+                       insights getAllInsights = shots.getValue(insights.class);
+
+                       String type = getAllInsights.getType();
+                       String title = getAllInsights.getTitle();
+                       String descrip = getAllInsights.getDescrip();
+                       String url = getAllInsights.getUrl();
+                       insights model = new insights(type,title,descrip,url);
+                       insItems.add(model);
+
+                   }
+                   insCycler.setAdapter(iAdapter);
+                   iAdapter.notifyDataSetChanged();
+               }
+               else {
+                   errormessage.setText("No Insights available");
+                   errormessage.setVisibility(View.VISIBLE);
+               }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

@@ -143,7 +143,7 @@ public class RegisterFragment extends Fragment {
     private TextView stage5;
     private TextView errortextstage;
 
-    private String profImage = "";
+    private String profImage = "default";
     private String gender = "";
     private String stage = "";
     private String dob = "";
@@ -510,11 +510,7 @@ public class RegisterFragment extends Fragment {
         startActivityForResult(c, RESULT_CAPTURE_IMAGE);
     }
 
-    public void getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "PYCImage", null));
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -523,19 +519,18 @@ public class RegisterFragment extends Fragment {
 
             Uri selectedImage = data.getData();
             uploadimage_reg.setImageURI(selectedImage);
-            try {
+            profImage = String.valueOf(selectedImage);
+          /*  try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
                 profImage = CommonMethods.imageToString(bitmap);
             } catch (IOException e) {
                 Log.i(PYC_LOG, "BITMAP  EXCEPTION " + e);
-            }
+            }*/
             Log.i(PYC_LOG, "Register selected is " + profImage);
 
         } else if (requestCode == RESULT_CAPTURE_IMAGE && data != null) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            getImageUri(getContext(), photo);
-
-            profImage = CommonMethods.imageToString(photo);
+            profImage = CommonMethods.getImageUri(context,photo);
 
         }
 
