@@ -31,11 +31,12 @@
             android:layout_below="@+id/user_image"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/iowan_old_style_roman"
-            android:text="Good Morning !!"
+            android:text="Welcome !!"
             android:textColor="@color/titletext_white"
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/usernametitle"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_below="@+id/greetingtext"
@@ -78,14 +79,14 @@
                 android:layout_marginBottom="3dp"
                 android:fontFamily="@font/helvetica_neue_medium"
                 android:text="TUESDAY"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/helvetica_neue_medium"
                 android:text="24th,March 2020"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorAccent" />
 
         </LinearLayout>
 
@@ -314,13 +315,23 @@
                 android:tint="@color/dense_blue"/>
 
         </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/insCycler"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="10dp"
             android:layout_weight="4.3"
-            android:orientation="horizontal"
-            tools:listitem="@layout/insight_item"/>
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/insCycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/insight_item"/>
+            <include layout="@layout/progresslayout"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
     </LinearLayout>
 </LinearLayout>

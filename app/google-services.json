@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "867794952730",
+    "firebase_url": "https://covid-19-awareness-97f17.firebaseio.com",
+    "project_id": "covid-19-awareness-97f17",
+    "storage_bucket": "covid-19-awareness-97f17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867794952730:android:70934a46afdb4a5f31e7a3",
+        "android_client_info": {
+          "package_name": "com.oktwohundred.corona.preventcorona"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867794952730-d6ietapdbrm83ofi9svfflu3itb3a3od.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLYhkPyTcTx5RtTqwuOlE_SiQdxXizYx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867794952730-d6ietapdbrm83ofi9svfflu3itb3a3od.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

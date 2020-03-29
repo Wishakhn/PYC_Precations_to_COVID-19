@@ -55,22 +55,26 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/no_permission"
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerInParent="true"
                         app:cardBackgroundColor="@color/btn_zinc"
                         app:cardCornerRadius="2dp"
-                        app:cardUseCompatPadding="true">
+                        android:elevation="7dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true"
+                        >
 
                         <TextView
                             android:id="@+id/btnleft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
                             android:text="@string/c_a_n_c_e_l"
                             android:textSize="16sp"
+                            android:paddingVertical="7dp"
                             android:fontFamily="@font/helvetica_neue_light"
                             android:textColor="@color/titletext_white" />
                     </androidx.cardview.widget.CardView>
@@ -78,22 +82,26 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/allow_permissions"
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:cardBackgroundColor="@color/btn_purple"
                         app:cardCornerRadius="2dp"
-                        app:cardUseCompatPadding="true">
+                        android:elevation="7dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true"
+                        >
 
                         <TextView
                             android:id="@+id/btnright"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:paddingVertical="7dp"
                             android:text="@string/a_l_l_o_w"
-                            android:textSize="17sp"
+                            android:textSize="16sp"
                             android:fontFamily="@font/helvetica_neue_light"
                             android:textColor="@color/titletext_white" />
                     </androidx.cardview.widget.CardView>

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionHeader
+    <com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionHeader
         android:id="@+id/genderHeaderP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:enabled="false"
                 android:imeOptions="actionNext"
                 android:gravity="center_vertical"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@color/descriptext_zinc"
                 android:fontFamily="@font/arial"
@@ -53,9 +53,9 @@
 
         </LinearLayout>
 
-    </com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionHeader>
+    </com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionHeader>
 
-    <com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionLayout
+    <com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionLayout
         android:id="@+id/gender_listP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,5 +130,5 @@
         </LinearLayout>
 
 
-    </com.swankapps.corona.preventcorona.ExpenssionLayout.ExpansionLayout>
+    </com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionLayout>
 </LinearLayout>
