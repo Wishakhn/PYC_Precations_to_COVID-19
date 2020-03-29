@@ -4,6 +4,7 @@ public class User {
     public static final String PYC_TABLE = "userlocaltable";
     public static final String COLUMN_COUNTRY = "country";
     public static final String COLUMN_ID = "userid";
+    public static final String COLUMN_FIREBASE_ID = "firebaseid";
     public static final String COLUMN_FULL_NAME = "username";
     public static final String COLUMN_EMAIL_ADD = "email";
     public static final String COLUMN_PROFIMAGE = "imageprof";
@@ -12,8 +13,9 @@ public class User {
     public static final String COLUMN_GENDER = "gender";
     public static final String COLUMN_STAGE = "stage";
     public static final String PYCTABLE_CREATE = "CREATE TABLE " + PYC_TABLE + "("
-            + COLUMN_ID + " TEXT,"
+            + COLUMN_ID + " INTEGER,"
             + COLUMN_GENDER + " TEXT,"
+            + COLUMN_FIREBASE_ID + " TEXT,"
             + COLUMN_STAGE + " TEXT,"
             + COLUMN_DOB + " TEXT,"
             + COLUMN_STATUS + " TEXT,"
@@ -21,7 +23,7 @@ public class User {
             + COLUMN_EMAIL_ADD + " TEXT,"
             + COLUMN_PROFIMAGE + " TEXT,"
             + COLUMN_COUNTRY + " TEXT" + ")";
-    private String userId;
+    private String id;
     private String userImage;
     private String userName;
     private String userMail;
@@ -31,10 +33,12 @@ public class User {
     private String userCountry;
     private String userStage;
     private String password;
+    private String firebaseId;
+
 
 
     public User(String userId, String userImage, String userName, String userMail, String userStatus, String userDob, String userGender, String userCountry, String userStage) {
-        this.userId = userId;
+        this.firebaseId = userId;
         this.userImage = userImage;
         this.userName = userName;
         this.userMail = userMail;
@@ -56,6 +60,14 @@ public class User {
         this.password = password;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUserStage() {
         return userStage;
     }
@@ -64,12 +76,12 @@ public class User {
         this.userStage = userStage;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getFirebaseId() {
+        return firebaseId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setFirebaseId(String firebaseId) {
+        this.firebaseId = firebaseId;
     }
 
     public String getUserImage() {

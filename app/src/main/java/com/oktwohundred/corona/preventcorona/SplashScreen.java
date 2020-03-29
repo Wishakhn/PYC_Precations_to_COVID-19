@@ -2,7 +2,6 @@ package com.oktwohundred.corona.preventcorona;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -13,6 +12,8 @@ import com.oktwohundred.corona.preventcorona.Activities.IntroSlider;
 import com.oktwohundred.corona.preventcorona.Activities.MainActivity;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
 import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
+
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
 
 public class SplashScreen extends BaseAtivity {
 Handler handler;
@@ -57,7 +58,14 @@ preferenceClass preference;
                   finish();
               }
               else{
-                  CommonMethods.intentHandler(SplashScreen.this, AuthOptions.class);
+                  if (preference.load_boolean(KEY_USER_IS_ACTIVE)){
+                      CommonMethods.intentHandler(SplashScreen.this, MainActivity.class);
+
+                  }
+                  else {
+                      CommonMethods.intentHandler(SplashScreen.this, AuthOptions.class);
+
+                  }
                   finish();
               }
           }

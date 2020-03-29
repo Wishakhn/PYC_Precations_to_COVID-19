@@ -65,14 +65,14 @@ FrameLayout containerauthfragment;
 
     void  callLoginFragment(){
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        LoginFragment frag1 = new LoginFragment();
+        LoginFragment frag1 = new LoginFragment(UserAuthentication.this);
         fragmentTransaction.replace(containerauthfragment.getId(), frag1, "Login  Fragment");
         fragmentTransaction.commit();
     }
 
     void  callRegisterFragment(){
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        RegisterFragment frag1 = new RegisterFragment();
+        RegisterFragment frag1 = new RegisterFragment(UserAuthentication.this);
         fragmentTransaction.replace(containerauthfragment.getId(), frag1, "Register  Fragment");
         fragmentTransaction.commit();
     }

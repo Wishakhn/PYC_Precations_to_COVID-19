@@ -22,17 +22,14 @@ import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.oktwohundred.corona.preventcorona.Adapter.timezoneAdapter;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
 import com.oktwohundred.corona.preventcorona.Helpers.PermissionHandler;
+import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.allcountry;
 import com.oktwohundred.corona.preventcorona.R;
@@ -54,15 +52,14 @@ import com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionLayout;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.oktwohundred.corona.preventcorona.Helpers.CommonMethods.imageToString;
 import static com.oktwohundred.corona.preventcorona.Helpers.CommonMethods.makeAlert;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.PYC_LOG;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.REQUEST_PERMISSION_CODE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.RESULT_CAPTURE_IMAGE;
@@ -154,6 +151,14 @@ public class RegisterFragment extends Fragment {
     private String email = "";
     private String password = "";
     private String country = "";
+    Context context;
+    preferenceClass prefs;
+
+    public RegisterFragment(Context context) {
+        this.context = context;
+        prefs = new preferenceClass(context);
+        prefs.initPreference();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -380,7 +385,7 @@ public class RegisterFragment extends Fragment {
     };
 
     void callLoginFragment() {
-        LoginFragment fragment2 = new LoginFragment();
+        LoginFragment fragment2 = new LoginFragment(context);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_authfragment, fragment2);
@@ -607,7 +612,7 @@ public class RegisterFragment extends Fragment {
                     System.out.println("User ID is " + userId);
                     firebaseRef = FirebaseDatabase.getInstance().getReference("PycUsers").child(userId);
                     HashMap<String, String> hashmap = new HashMap<>();
-                    hashmap.put("userId", userId);
+                    hashmap.put("firebaseId", userId);
                     hashmap.put("userName", name);
                     hashmap.put("userMail", email);
                     hashmap.put("userGender", gender);
@@ -624,7 +629,8 @@ public class RegisterFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 DbManager db= new DbManager(getContext());
                                 db.deleteAllUsers();
-                                db.insertUserData(Long.parseLong(userId),country,name,email,gender,profImage,dob,stage,"1");
+                                db.insertUserData(0123,userId,name,email,profImage,gender,dob,country,stage,"1");
+                                prefs.save_boolean(KEY_USER_IS_ACTIVE,true);
                                 CommonMethods.intentHandler(getContext(), MainActivity.class);
                             }
                             else {

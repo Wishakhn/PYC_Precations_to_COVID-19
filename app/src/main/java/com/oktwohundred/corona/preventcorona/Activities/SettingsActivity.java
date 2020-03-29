@@ -1,11 +1,11 @@
 package com.oktwohundred.corona.preventcorona.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,20 +14,27 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.BaseAtivity;
-import com.oktwohundred.corona.preventcorona.Fragments.AboutFragment;
-import com.oktwohundred.corona.preventcorona.Fragments.HelpFragment;
-import com.oktwohundred.corona.preventcorona.Fragments.RegisterFragment;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
 import com.oktwohundred.corona.preventcorona.Helpers.LocaleManager;
 import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
+import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.R;
+
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_SAVED_RADIO_BUTTON_INDEX;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
 
 public class SettingsActivity extends BaseAtivity {
 
@@ -94,7 +101,33 @@ public class SettingsActivity extends BaseAtivity {
 
 
     public void GotoLogout(View view) {
+        CommonMethods.displayProgressDialog(SettingsActivity.this,"Logging Out . . . . . ");
+        LogoutUser();
 
+    }
+
+    private void LogoutUser() {
+        final DbManager data = new DbManager(SettingsActivity.this);
+        String fbid = ""+ data.getUserData().getFirebaseId();
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PycUsers").child(fbid).child("userStatus");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CommonMethods.hideProgressDialog();
+                reference.setValue("0");
+                data.deleteAllUsers();
+                FirebaseAuth.getInstance().signOut();
+                prefs.save_boolean(KEY_USER_IS_ACTIVE,false);
+                Intent goback = new Intent(SettingsActivity.this, AuthOptions.class);
+                goback.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(goback);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(SettingsActivity.this, "Error !! \n" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -151,7 +184,7 @@ public class SettingsActivity extends BaseAtivity {
         doChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prefs.saveButtonPreferences(prefs.KEY_SAVED_RADIO_BUTTON_INDEX, checkedIndex[0], SettingsActivity.this);
+                prefs.saveButtonPreferences(KEY_SAVED_RADIO_BUTTON_INDEX, checkedIndex[0], SettingsActivity.this);
                 setNewLocale(SettingsActivity.this, Languagae[0]);
             }
         });

@@ -1,6 +1,6 @@
 package com.oktwohundred.corona.preventcorona.Fragments;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,11 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,12 +34,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
 import com.oktwohundred.corona.preventcorona.Helpers.Constants;
+import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.User;
 import com.oktwohundred.corona.preventcorona.R;
 import com.oktwohundred.corona.preventcorona.Activities.MainActivity;
 
 import static com.oktwohundred.corona.preventcorona.Helpers.CommonMethods.makeAlert;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.OPPS;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.SORRY;
 
@@ -64,6 +63,13 @@ public class LoginFragment extends Fragment {
 
     private TextView errortextpass1;
     private TextView errortextmail1;
+    Context context;
+    preferenceClass prefs;
+    public LoginFragment(Context context) {
+        this.context = context;
+        prefs = new preferenceClass(context);
+        prefs.initPreference();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +78,7 @@ public class LoginFragment extends Fragment {
         View lv = inflater.inflate(R.layout.fragment_login, container, false);
         TextView registerFragment = lv.findViewById(R.id.registerFragment);
         auth = FirebaseAuth.getInstance();
-        database = new DbManager(getContext());
+        database = new DbManager(context);
         logmailedit = lv.findViewById(R.id.logmailedit);
         log_passedit = lv.findViewById(R.id.log_passedit);
         log_mailicon = lv.findViewById(R.id.log_mailicon);
@@ -163,7 +169,7 @@ public class LoginFragment extends Fragment {
     }
 
     void callRegisterFragment() {
-        RegisterFragment fragment2 = new RegisterFragment();
+        RegisterFragment fragment2 = new RegisterFragment(context);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_authfragment, fragment2);
@@ -243,7 +249,7 @@ public class LoginFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CommonMethods.hideProgressDialog();
                 User modelUser = dataSnapshot.getValue(User.class);
-                String userId = modelUser.getUserId();
+                String userId = modelUser.getFirebaseId();
                 String name = modelUser.getUserName();
                 String dob = modelUser.getUserDob();
                 String stage = modelUser.getUserStage();
@@ -253,7 +259,9 @@ public class LoginFragment extends Fragment {
                 String status = modelUser.getUserStatus();
                 String image = modelUser.getUserImage();
                 database.deleteAllUsers();
-                database.insertUserData(Long.parseLong(userId), country, name, email, gen, image, dob, stage, status);
+                database.insertUserData(0123,userId,name,email,image,gen,dob,country,stage,status);
+                prefs.save_boolean(KEY_USER_IS_ACTIVE,true);
+
                 CommonMethods.intentHandler(getContext(), MainActivity.class);
 
                 System.out.println("Database is :" + dataSnapshot.getChildren());

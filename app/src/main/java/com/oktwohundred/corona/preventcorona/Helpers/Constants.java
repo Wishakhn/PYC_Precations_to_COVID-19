@@ -11,7 +11,9 @@ public class Constants {
     public static final int RESULT_LOAD_IMAGE = 1001;
     public static final int RESULT_CAPTURE_IMAGE = 1002;
     public static final int REQUEST_PERMISSION_CODE = 2001;
-
+    public static final String KEY_FIRST_RUN = "If_App_First_Run";
+    public static final String KEY_SAVED_RADIO_BUTTON_INDEX = "Set_Radio_Button";
+    public static final String KEY_USER_IS_ACTIVE = "If_User_Active";
 
     public  static  final  String URL_IMF_BLOG = "https://blogs.imf.org/2020/03/23/covid-19-pandemic-and-the-middle-east-and-central-asia-region-facing-dual-shock/";
     public  static  final  String URL_WHO_BLOG = "https://www.who.int/health-topics/coronavirus#tab=tab_1";

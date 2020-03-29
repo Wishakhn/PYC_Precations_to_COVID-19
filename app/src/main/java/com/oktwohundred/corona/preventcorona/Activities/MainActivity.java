@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.oktwohundred.corona.preventcorona.Adapter.insightAdapter;
 import com.oktwohundred.corona.preventcorona.BaseAtivity;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
+import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.insights;
 import com.oktwohundred.corona.preventcorona.R;
@@ -30,6 +33,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_USER_IS_ACTIVE;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.PYC_LOG;
 import static com.oktwohundred.corona.preventcorona.Helpers.LocaleManager.getLocale;
 
 public class MainActivity extends BaseAtivity {
@@ -52,12 +57,19 @@ public class MainActivity extends BaseAtivity {
     DbManager database;
     TextView usernametitle;
     CircleImageView user_image;
+    ProgressBar progressloader;
+    TextView errormessage;
+
+
 
 
     @Override
     public void initViews(Bundle savedInstanceState) {
         getLocale(getResources());
         database = new DbManager(MainActivity.this);
+
+        errormessage = findViewById(R.id.errormessage);
+        progressloader = findViewById(R.id.progressloader);
         user_image = findViewById(R.id.user_image);
         insCycler = findViewById(R.id.insCycler);
         insCycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
@@ -67,22 +79,24 @@ public class MainActivity extends BaseAtivity {
         dLayout = findViewById(R.id.dLayout);
         usernametitle = findViewById(R.id.usernametitle);
         String uname = ""+database.getUserData().getUserName();
+        Log.i(PYC_LOG,"User name is "+uname);
         usernametitle.setText(uname);
         String imgBase64 = ""+database.getUserData().getUserImage();
         if (CommonMethods.IsBase64Encoded(imgBase64)){
             imgBase64 = CommonMethods.deCode(imgBase64);
-            Glide.with(MainActivity.this).asBitmap().load(imgBase64).into(new CustomTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    user_image.setImageBitmap(resource);
-                }
-
-                @Override
-                public void onLoadCleared(@Nullable Drawable placeholder) {
-                }
-            });
 
         }
+        Glide.with(MainActivity.this).load(imgBase64).into(user_image);
+        /*Glide.with(MainActivity.this).asBitmap().load(imgBase64).into(new CustomTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                user_image.setImageBitmap(resource);
+            }
+
+            @Override
+            public void onLoadCleared(@Nullable Drawable placeholder) {
+            }
+        });*/
         closedrawer_btn = findViewById(R.id.closedrawer_btn);
         openProfile = findViewById(R.id.openProfile);
         openSearch = findViewById(R.id.openSearch);
@@ -118,6 +132,7 @@ public class MainActivity extends BaseAtivity {
     }
 
     private void loadInsights() {
+        progressloader.setVisibility(View.GONE);
         insItems.clear();
         insItems.add(new insights("research", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));
         insItems.add(new insights("news", "COVID-19 is not Fatal", "Some research is mentions that corona is not a fatal disease", ""));

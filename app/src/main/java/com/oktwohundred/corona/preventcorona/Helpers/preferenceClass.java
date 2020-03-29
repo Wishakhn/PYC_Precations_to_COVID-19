@@ -7,6 +7,8 @@ import android.widget.RadioGroup;
 import android.widget.ShareActionProvider;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_FIRST_RUN;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.KEY_SAVED_RADIO_BUTTON_INDEX;
 
 public class preferenceClass {
 
@@ -14,8 +16,7 @@ public class preferenceClass {
     private SharedPreferences sharedPrefs;
     private final int PREFS_MODE = Context.MODE_PRIVATE;
     private final String SHARED_PREFS_NAME = "PYC_Preference";
-    private final String KEY_FIRST_RUN = "If_App_First_Run";
-    public final String KEY_SAVED_RADIO_BUTTON_INDEX = "Set_Radio_Button";
+
     private SharedPreferences.Editor editor;
 
     public preferenceClass(Context context) {
@@ -36,22 +37,22 @@ public class preferenceClass {
         return firstRun;
     }
 
-    void save_String (String key, String value){
+  public   void save_String (String key, String value){
         editor = sharedPrefs.edit();
         editor.putString(key,value);
         editor.apply();
     }
-    String load_String (String Key){
+   public String load_String (String Key){
         String savedString = sharedPrefs.getString(Key, "");
         return savedString;
     }
 
-    void save_boolean (String key, boolean value){
+   public void save_boolean (String key, boolean value){
         editor = sharedPrefs.edit();
         editor.putBoolean(key,value);
         editor.apply();
     }
-    boolean load_boolean (String Key){
+    public boolean load_boolean (String Key){
         boolean savedBoolean = sharedPrefs.getBoolean(Key, false);
         return savedBoolean;
     }
