@@ -99,7 +99,7 @@ public class SettingOptions extends BaseAtivity {
     }
     private void callSaveFeedFragment() {
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        SaveFeedFragment frag1 = new SaveFeedFragment();
+        SaveFeedFragment frag1 = new SaveFeedFragment(SettingOptions.this);
         fragmentTransaction.replace(container_settFragment.getId(), frag1, "Save Feed Fragment");
         fragmentTransaction.commit();
     }

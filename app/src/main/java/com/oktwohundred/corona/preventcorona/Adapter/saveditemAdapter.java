@@ -14,7 +14,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.child;
+import com.oktwohundred.corona.preventcorona.Model.feeds;
 import com.oktwohundred.corona.preventcorona.Model.savedfeeds;
 import com.oktwohundred.corona.preventcorona.R;
 
@@ -24,12 +31,12 @@ import java.util.List;
 public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.savedViewholder> {
 
     Context context;
-    List<savedfeeds> savedItems;
+    List<feeds> savedItems;
     List<child> childItem = new ArrayList<>();
     childAdapter cAdapter = new childAdapter(childItem);
 
 
-    public saveditemAdapter(Context context, List<savedfeeds> savedItems) {
+    public saveditemAdapter(Context context, List<feeds> savedItems) {
         this.context = context;
         this.savedItems = savedItems;
     }
@@ -44,14 +51,16 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
 
     @Override
     public void onBindViewHolder(@NonNull final saveditemAdapter.savedViewholder holder, int position) {
-        savedfeeds model = savedItems.get(position);
+        feeds model = savedItems.get(position);
         String feedtype = model.getFeedType();
         String title = model.getFeedName();
         String descript = model.getFeedDescrip();
         float rating = model.getFeedRating();
+        final String id = model.getFeedId();
+
         if (feedtype.equalsIgnoreCase("remedy")){
             holder.display.setVisibility(View.VISIBLE);
-            getallchilds();
+            getallchilds(id);
             holder.childcycler.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
         }
@@ -80,13 +89,32 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
     public int getItemCount() {
         return savedItems.size();
     }
-    private void getallchilds() {
+    private void getallchilds(final String id) {
+        DbManager db = new DbManager(context);
+        String uid = ""+db.getUserData().getFirebaseId();
         childItem.clear();
-        childItem.add(new child("Water","4 cups"));
-        childItem.add(new child("Ginger","2 tbs"));
-        childItem.add(new child("Mint","4 leaves"));
-        childItem.add(new child("Honney","4 tbs"));
-        cAdapter.notifyDataSetChanged();
+        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(uid).child(id).child("Ings");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot shots : dataSnapshot.getChildren()){
+                        child cmodel = shots.getValue(child.class);
+                        String name = cmodel.getChildName();
+                        String measure = cmodel.getChildDescrip();
+                        child model = new child(name,measure);
+                        childItem.add(model);
+                    }
+                    cAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public class savedViewholder extends RecyclerView.ViewHolder {
