@@ -10,7 +10,6 @@
     <string name="c_a_n_c_e_l">CANCEL</string>
     <string name="done">DONE</string>
     <string name="timezone">Country</string>
-    <string name="gender">Gender</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="undefined_gen">Other</string>

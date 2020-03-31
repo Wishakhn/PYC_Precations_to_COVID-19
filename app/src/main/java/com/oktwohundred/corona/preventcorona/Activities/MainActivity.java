@@ -101,7 +101,7 @@ public class MainActivity extends BaseAtivity {
          rCity= findViewById(R.id.rCity);
          rSurv= findViewById(R.id.rSurv);
          rVics= findViewById(R.id.rVics);
-        TextView rCas;
+         rCas= findViewById(R.id.rCas);
         usernametitle = findViewById(R.id.usernametitle);
         String uname = ""+database.getUserData().getUserName();
         Log.i(PYC_LOG,"User name is "+uname);

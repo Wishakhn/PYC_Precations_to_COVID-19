@@ -104,7 +104,7 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
     private void populateData(String id, child model) {
         DbManager db = new DbManager(context);
         String uid = ""+db.getUserData().getFirebaseId();
-        String cId = model.getChildId();
+        String cId = ""+model.getChildId();
         DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(uid).child(id).child("Ings").child(cId);
         HashMap<String, String> hashmap = new HashMap<>();
         hashmap.put("childName", model.getChildName());
@@ -150,7 +150,7 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
                     String cname = isChild.get(i).getChildName();
                     String descp = isChild.get(i).getChildDescrip();
                     String cId = isChild.get(i).getChildId();
-                    child model = new child(cId,cname,descp);
+                    child model = new child(cname,descp,cId);
                     populateData(feedIds,model);
                     Log.i(PYC_LOG,"Ings Loop RUnning"+cname+"   and "+descp);
                 }

@@ -9,14 +9,11 @@
     <color name="titletext_white">#EBE4E4</color>
     <color name="descriptext_grey">#6F7C89</color>
     <color name="descriptext_zinc">#1FB3B9</color>
-    <color name="insight_news">#8B5598</color>
-    <color name="insight_searches">#557498</color>
     <color name="region_card">#E0E0E0</color>
     <color name="background">#E5E5E5</color>
     <color name="btn_zinc">#1FB3B9</color>
     <color name="btn_purple">#8531B1</color>
     <color name="btn_label">#9DADF8</color>
-    <color name="btn_inactive">#818CBE</color>
     <color name="dense_blue">#0B4462</color>
     <color name="grey">#898E8E</color>
     <color name="magenta">#6C4F6A</color>

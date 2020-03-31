@@ -77,7 +77,7 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
             public void onClick(View v) {
                 if (holder.containerdetails.getVisibility() == View.GONE){
                     holder.containerdetails.setVisibility(View.VISIBLE);
-                    holder.display.setImageResource(R.drawable.uparrow);
+                    holder.display.setImageResource(R.drawable.downarrow_selected);
                 }
                 else {
                     holder.containerdetails.setVisibility(View.GONE);

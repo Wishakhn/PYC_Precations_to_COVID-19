@@ -69,20 +69,19 @@ public class RemedyFragment extends Fragment {
                 if (dataSnapshot.getValue() != null){
                     for (DataSnapshot shots : dataSnapshot.getChildren()){
                         feeds remedies = shots.getValue(feeds.class);
-                        Log.i(PYC_LOG,"Error trace "+remedies.toString());
-//                        System.out.println("remedies get are "+dataSnapshot.getChildren());
-//                        String feedtype = remedies.getFeedType();
-//                        if (feedtype.equalsIgnoreCase("remedy")){
-//                            String feedid = remedies.getFeedId();
-//                            String feedname = remedies.getFeedName();
-//                            String feedintro = remedies.getFeedIntro();
-//                            String feeddescrip = remedies.getFeedDescrip() ;
-//                            String feedrating = remedies.getFeedRating();
-//                            String isSaved = remedies.getIsSaved();
-//                            List<child> ChildIs = remedies.getIngs();
-//                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved, ChildIs);
-//                            feedItems.add(model);
-//                        }
+                        Log.i(PYC_LOG,"Error trace "+dataSnapshot.getChildren());
+                        String feedtype = remedies.getFeedType();
+                        if (feedtype.equalsIgnoreCase("remedy")){
+                            String feedid = remedies.getFeedId();
+                            String feedname = remedies.getFeedName();
+                            String feedintro = remedies.getFeedIntro();
+                            String feeddescrip = remedies.getFeedDescrip() ;
+                            String feedrating = remedies.getFeedRating();
+                            String isSaved = remedies.getIsSaved();
+                            List<child> ChildIs = remedies.getIngs();
+                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved, ChildIs);
+                            feedItems.add(model);
+                        }
                     }
                     remCycler.setAdapter(fadapter);
                     fadapter.notifyDataSetChanged();
