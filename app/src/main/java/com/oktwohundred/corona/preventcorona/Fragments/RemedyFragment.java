@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.oktwohundred.corona.preventcorona.Model.child;
 import com.oktwohundred.corona.preventcorona.Model.feeds;
 import com.oktwohundred.corona.preventcorona.R;
 import com.oktwohundred.corona.preventcorona.Adapter.feedsAdapter;
@@ -25,6 +27,8 @@ import com.oktwohundred.corona.preventcorona.Adapter.feedsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.PYC_LOG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,18 +69,20 @@ public class RemedyFragment extends Fragment {
                 if (dataSnapshot.getValue() != null){
                     for (DataSnapshot shots : dataSnapshot.getChildren()){
                         feeds remedies = shots.getValue(feeds.class);
-
-                        String feedtype = remedies.getFeedType();
-                        if (feedtype.equalsIgnoreCase("remedy")){
-                            String feedid = remedies.getFeedId();
-                            String feedname = remedies.getFeedName();
-                            String feedintro = remedies.getFeedIntro();
-                            String feeddescrip = remedies.getFeedDescrip() ;
-                            float feedrating = remedies.getFeedRating();
-                            boolean isSaved = remedies.isSaved();
-                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
-                            feedItems.add(model);
-                        }
+                        Log.i(PYC_LOG,"Error trace "+remedies.toString());
+//                        System.out.println("remedies get are "+dataSnapshot.getChildren());
+//                        String feedtype = remedies.getFeedType();
+//                        if (feedtype.equalsIgnoreCase("remedy")){
+//                            String feedid = remedies.getFeedId();
+//                            String feedname = remedies.getFeedName();
+//                            String feedintro = remedies.getFeedIntro();
+//                            String feeddescrip = remedies.getFeedDescrip() ;
+//                            String feedrating = remedies.getFeedRating();
+//                            String isSaved = remedies.getIsSaved();
+//                            List<child> ChildIs = remedies.getIngs();
+//                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved, ChildIs);
+//                            feedItems.add(model);
+//                        }
                     }
                     remCycler.setAdapter(fadapter);
                     fadapter.notifyDataSetChanged();

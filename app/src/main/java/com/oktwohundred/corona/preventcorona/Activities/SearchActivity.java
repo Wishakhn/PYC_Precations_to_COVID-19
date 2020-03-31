@@ -143,8 +143,8 @@ public class SearchActivity extends BaseAtivity {
                         String feedname = remedies.getFeedName();
                         String feedintro = remedies.getFeedIntro();
                         String feeddescrip = remedies.getFeedDescrip() ;
-                        float feedrating = remedies.getFeedRating();
-                        boolean isSaved = remedies.isSaved();
+                        String feedrating = remedies.getFeedRating();
+                        String isSaved = remedies.getIsSaved();
                         feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
                         feedItems.add(model);
                     }

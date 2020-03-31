@@ -42,10 +42,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Some Symptoms theory"/>
+                android:justificationMode="inter_word"
+                android:text="@string/myths_descrip"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:padding="10dp"
+                android:id="@+id/mythCycler"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_symptom"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,11 +65,16 @@
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:justificationMode="inter_word"
                 android:layout_height="wrap_content"
-                android:text="Some Symptoms theory"/>
+                android:text="@string/real_descrip"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:padding="10dp"
+                android:id="@+id/realCycler"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_symptom"/>
 
         </LinearLayout>
     </ScrollView>

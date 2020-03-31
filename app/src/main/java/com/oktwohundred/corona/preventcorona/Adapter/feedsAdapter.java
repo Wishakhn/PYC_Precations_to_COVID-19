@@ -42,8 +42,7 @@ import static com.oktwohundred.corona.preventcorona.Helpers.Constants.SORRY;
 public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewholder> {
     Context context;
     List<feeds> feedsItem;
-    List<child> childItem = new ArrayList<>();
-    childAdapter cAdapter = new childAdapter(childItem);
+
 
     public feedsAdapter(Context context, List<feeds> feedsItem) {
         this.context = context;
@@ -64,12 +63,12 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
         final String feedtype = model.getFeedType();
         final String title = model.getFeedName();
         final String descript = model.getFeedDescrip();
-        final float rating = model.getFeedRating();
-        boolean saved = model.isSaved();
+        final float rating = Float.parseFloat(model.getFeedRating());
+        final List<child> isChild = model.getIngs();
         final String id = model.getFeedId();
         if (feedtype.equalsIgnoreCase("remedy")){
             holder.display.setVisibility(View.VISIBLE);
-            getallchilds(id);
+            childAdapter cAdapter = new childAdapter(isChild);
             holder.childcycler.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
         }
@@ -84,7 +83,7 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
             public void onClick(View v) {
                 if (holder.containerdetails.getVisibility() == View.GONE){
                     holder.containerdetails.setVisibility(View.VISIBLE);
-                    holder.display.setImageResource(R.drawable.uparrow);
+                    holder.display.setImageResource(R.drawable.downarrow_selected);
                 }
                 else {
                     holder.containerdetails.setVisibility(View.GONE);
@@ -95,90 +94,42 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
         holder.savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveFeedstoUser(id,feedtype,title,descript,rating,true, holder.savetext, holder.savebtn);
-                saveFeedChild(id);
+                saveFeedstoUser(id,feedtype,title,descript,rating,true, holder.savetext, holder.savebtn,isChild);
             }
         });
 
     }
 
-    private void saveFeedChild(final String id) {
-        DatabaseReference  childRef = FirebaseDatabase.getInstance().getReference("NewsFeeds").child(id).child("Ings");
-        childRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot shots : dataSnapshot.getChildren()){
-                        child cmodel = shots.getValue(child.class);
-                        String name = cmodel.getChildName();
-                        String measure = cmodel.getChildDescrip();
-                        child model = new child(name,measure);
-                        populateData(id,model);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-    }
 
     private void populateData(String id, child model) {
         DbManager db = new DbManager(context);
         String uid = ""+db.getUserData().getFirebaseId();
-        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(uid).child(id).child("Ings");
+        String cId = model.getChildId();
+        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(uid).child(id).child("Ings").child(cId);
         HashMap<String, String> hashmap = new HashMap<>();
         hashmap.put("childName", model.getChildName());
+        hashmap.put("childId", cId);
         hashmap.put("childDescrip", model.getChildDescrip());
         firebaseRef.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 //do nothing
+                Log.i(PYC_LOG,"Feed Saved with Ings");
+
 
             }
         });
 
     }
 
-    private void getallchilds(final String id) {
-        childItem.clear();
-        DatabaseReference  firebaseRef = FirebaseDatabase.getInstance().getReference("NewsFeeds").child(id).child("Ings");
-        firebaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-             if (dataSnapshot.exists()){
-                 for (DataSnapshot shots : dataSnapshot.getChildren()){
-                     child cmodel = shots.getValue(child.class);
-                     String name = cmodel.getChildName();
-                     String measure = cmodel.getChildDescrip();
-                     child model = new child(name,measure);
-                     childItem.add(model);
-                 }
-                 cAdapter.notifyDataSetChanged();
-             }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     @Override
     public int getItemCount() {
         return feedsItem.size();
     }
 
-    void  saveFeedstoUser(String feedIds, final String type, String name, String descrip, float rating, boolean saved,
-                          final TextView savetext, final CardView savebtn){
+    void  saveFeedstoUser(final String feedIds, final String type, String name, String descrip, float rating, boolean saved,
+                          final TextView savetext, final CardView savebtn, final List<child> isChild){
         DbManager db = new DbManager(context);
         String id = ""+db.getUserData().getFirebaseId();
         DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(id).child(feedIds);
@@ -190,10 +141,19 @@ public class feedsAdapter extends RecyclerView.Adapter<feedsAdapter.feedViewhold
         hashmap.put("feedDescrip", descrip);
         hashmap.put("feedRating", ""+rating);
         hashmap.put("isSaved", ""+saved);
+
         Log.i(PYC_LOG,"Sending Params "+hashmap);
         firebaseRef.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                for (int i = 0 ; i<isChild.size(); i++){
+                    String cname = isChild.get(i).getChildName();
+                    String descp = isChild.get(i).getChildDescrip();
+                    String cId = isChild.get(i).getChildId();
+                    child model = new child(cId,cname,descp);
+                    populateData(feedIds,model);
+                    Log.i(PYC_LOG,"Ings Loop RUnning"+cname+"   and "+descp);
+                }
                 if (task.isSuccessful()) {
                     savetext.setText("SAVED");
                     savebtn.setEnabled(false);

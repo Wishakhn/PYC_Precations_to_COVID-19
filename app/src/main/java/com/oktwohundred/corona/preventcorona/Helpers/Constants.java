@@ -19,4 +19,17 @@ public class Constants {
     public  static  final  String URL_WHO_BLOG = "https://www.who.int/health-topics/coronavirus#tab=tab_1";
     public  static  final  String URL_UNICEF_BLOG = "https://www.unicef.org/pakistan/coronavirus-disease-covid-19-what-parents-should-know";
 
+   public static final String[] countries = {"Australia", "Austria", "Argentina", "Algeria", "Armenia", "Andorra", "Afghanistan", "Albania", "Azerbaijan", "Angola", "Antigua and Barbuda",
+            "Benin" ,"Belgium" ,"Brazil ","Bahamas", "Bahrain","Bulgaria","Bosnia and Herzegovina","Burkina Faso","Barbados","Bangladesh","Bolivia","Belarus","Brunei" , "Bhutan"
+            ,"Belize","Central African Republic","Chad","Cuba","Cambodia","Canada","China","Croatia", "Colombia","Cyprus" , "Costa Rica","Cameroon","Cape Verde",
+            "Chile","Czech Republic","Denmark","Dominican Republic","Democratic Republic of the Congo","Djibouti","Dominica","El Salvador","Equatorial Guinea",
+            "Ethiopia","Eritrea","Eswatini","Ecuador","Estonia" ,"East Timor","Egypt","France","Finland","Fiji","Germany","Greece","Ghana","Guatemala","Guinea","Georgia","Grenada",
+            "Gabon","Guinea-Bassau","Gambia","Hungary","Haiti","Honduras","Ivory Coast","Iran","Italy","Israel","Iraq", "Ireland","Indonesia","India","Iceland",
+            "Japan","Jordan","Jamaica","Kosovo","Kyrgyzstan","Kazakhstan","Kuwait","Kenya","Luxembourg","Lithuania","Lebanon","Latvia","Liechtenstein","Laos", "Libya",
+            "Liberia","Mozambique","Mauritius","Morocco","Moldova","Malaysia","Mexico","Monaco","Madagascar","Malta","Montenegro","Mali","Mongolia","Maldives","Myanmar","Mauritania","Nepal",
+            "Namibia","Nicaragua","Niger","North Macedonia","Nigeria","Netherlands","Norway","New Zealand","Oman","Occupied Palestinian Territories","Portugal","Pakistan","Philippines","Poland","Panama",
+            "Paraguay","Peru","Papua New Guinea", "Qatar","Russia","Romania","Rwanda","Republic of the Congo","Sweden","Switzerland","Spain","South Korea","Saudi Arabia","South Africa",
+            "Singapore","Slovenia","Serbia","Saint Lucia","Syria","Seychelles","Suriname", "Sudan","Somalia","Slovakia", "Senegal","Sri Lanka","San Marino","Saint Kitts and Nevis",
+            "Saint Vincent and the Grenadines","Turkey","Tunisia","Taiwan","Thailand","Togo","Tanzania","Trinidad and Tobago","United Kingdom","United States","United Arab Emirates",
+            "Ukraine","Uruguy","Uzbekistan", "Uganda","Vietnam","Venezuela","Vatican","Zimbabwe","Zambia" };
 }

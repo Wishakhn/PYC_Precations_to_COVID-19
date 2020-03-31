@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.oktwohundred.corona.preventcorona.BaseAtivity;
 import com.oktwohundred.corona.preventcorona.ExpenssionLayout.ExpansionLayout;
+import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,37 +29,28 @@ public class profileActivity extends BaseAtivity {
     CircleImageView uploadimage_prof;
     CardView btn_prof;
 
-    ImageView prof_nameicon;
     EditText prof_nameedit;
-    View prof_nameview;
 
-    ImageView prof_mailicon;
     EditText prof_mailedit;
-    View prof_mailview;
     ImageView iconeditmail;
 
 
 
-    ImageView gendericon;
     EditText genderedit;
-    View reg_genderview;
     ImageView indecator_genderP;
     ExpansionLayout gender_listP;
     TextView femaleP;
     TextView maleP;
     TextView noneeP;
+    TextView prof_dobedit;
 
 
-    ImageView countryicon;
     EditText countryedit;
-    View reg_countryview;
     ImageView indecator_timeP;
     ExpansionLayout timezoneP;
     RecyclerView timezonecylcer;
 
-    ImageView sageicon;
     EditText stageedit;
-    View reg_stageview;
     ImageView indecator_stage;
     ExpansionLayout user_liststage;
     TextView stage1;
@@ -67,36 +60,48 @@ public class profileActivity extends BaseAtivity {
     TextView stage5;
 
 
-    String profImage = "some image here";
-    String gender = "Other";
-    String stage = "stage1";
+    String profImage = "";
+    String gender = "";
+    String stage = "";
+    String name ="";
+    String country ="";
+    String email = "";
+    String dob = "";
+
     @Override
     public void initViews(Bundle savedInstanceState) {
         getLocale(getResources());
+        DbManager database = new DbManager(profileActivity.this);
+        profImage = ""+database.getUserData().getUserImage();
+        gender = ""+ database.getUserData().getUserGender();
+        stage = ""+database.getUserData().getUserStage();
+        name = ""+database.getUserData().getUserName();
+        country = ""+database.getUserData().getUserCountry();
+        email = ""+database.getUserData().getUserMail();
+        dob =""+database.getUserData().getUserDob();
+
 
         backtext = findViewById(R.id.backtext);
         backgo = findViewById(R.id.backgo);
 
+         prof_nameedit= findViewById(R.id.prof_nameedit);
+        prof_dobedit= findViewById(R.id.prof_dobedit);
+         prof_mailedit= findViewById(R.id.prof_mailedit);
+         iconeditmail= findViewById(R.id.iconeditmail);
 
-        gendericon= findViewById(R.id.gendericon);
         genderedit= findViewById(R.id.genderedit);
-        reg_genderview= findViewById(R.id.reg_genderview);
         indecator_genderP= findViewById(R.id.indecator_genderP);
         gender_listP= findViewById(R.id.gender_listP);
         femaleP= findViewById(R.id.femaleP);
         maleP= findViewById(R.id.maleP);
         noneeP= findViewById(R.id.noneeP);
 
-        countryicon= findViewById(R.id.countryicon);
         countryedit= findViewById(R.id.countryedit);
-        reg_countryview= findViewById(R.id.reg_countryview);
         indecator_timeP= findViewById(R.id.indecator_timeP);
         timezoneP= findViewById(R.id.timezoneP);
         timezonecylcer= findViewById(R.id.timezonecylcer);
 
-        sageicon= findViewById(R.id.sageicon);
         stageedit= findViewById(R.id.stageedit);
-        reg_stageview= findViewById(R.id.reg_stageview);
         indecator_stage= findViewById(R.id.indecator_stage);
         user_liststage= findViewById(R.id.user_liststage);
         stage1= findViewById(R.id.stage1);
@@ -104,6 +109,25 @@ public class profileActivity extends BaseAtivity {
         stage3= findViewById(R.id.stage3);
         stage4= findViewById(R.id.stage4);
         stage5= findViewById(R.id.stage5);
+
+//        if (profImage.isEmpty() || profImage.equalsIgnoreCase("default")){
+//            Glide.with(profileActivity.this).load(R.drawable.profile_image).into(uploadimage_prof);
+//        }
+//        else {
+//            Glide.with(profileActivity.this).load(profImage).into(uploadimage_prof);
+//
+//        }
+        indecator_stage.setVisibility(View.INVISIBLE);
+        indecator_timeP.setVisibility(View.INVISIBLE);
+        indecator_genderP.setVisibility(View.INVISIBLE);
+        genderedit.setText(gender);
+        countryedit.setText(country);
+        stageedit.setText(stage);
+        prof_mailedit.setText(email);
+        prof_nameedit.setText(name);
+        prof_dobedit.setText(dob);
+
+
     }
 
     @Override

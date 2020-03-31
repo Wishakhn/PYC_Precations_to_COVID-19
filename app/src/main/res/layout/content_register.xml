@@ -20,6 +20,7 @@
                 android:id="@+id/uploadimage_reg"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="gone"
                 android:src="@drawable/profile_image" />
 
             <View

@@ -25,6 +25,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="gone"
                 android:src="@drawable/profile_image"/>
             <View
                 android:layout_width="match_parent"
@@ -43,6 +44,7 @@
                     android:src="@drawable/profile_icon"/>
 
                 <EditText
+                    android:id="@+id/prof_nameedit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4.7"
@@ -51,6 +53,7 @@
                     android:imeOptions="actionNext"
                     android:textColorHint="@color/grey"
                     android:hint="Full Name"
+                    android:enabled="false"
                     android:textColor="@color/descriptext_zinc"
                     android:fontFamily="@font/arial"
                     android:textSize="15sp" />
@@ -81,6 +84,7 @@
                     android:src="@drawable/mail"/>
 
                 <EditText
+                    android:id="@+id/prof_mailedit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4.7"
@@ -89,6 +93,7 @@
                     android:imeOptions="actionNext"
                     android:textColorHint="@color/grey"
                     android:hint="example@email,com"
+                    android:enabled="false"
                     android:textColor="@color/descriptext_zinc"
                     android:fontFamily="@font/arial"
                     android:textSize="15sp" />
@@ -120,6 +125,7 @@
                     android:src="@drawable/calendar"/>
 
                 <EditText
+                    android:id="@+id/prof_dobedit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4.7"
@@ -130,6 +136,7 @@
                     android:gravity="center_vertical"
                     android:inputType="text"
                     android:singleLine="true"
+                    android:enabled="false"
                     android:textColor="@color/descriptext_zinc"
                     android:fontFamily="@font/arial"
                     android:textSize="15sp" />
@@ -197,6 +204,7 @@
                 app:cardCornerRadius="3dp"
                 android:layout_marginHorizontal="20dp"
                 app:cardElevation="5dp"
+                android:visibility="gone"
                 app:cardUseCompatPadding="true"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="40dp">

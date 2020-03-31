@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,10 +29,14 @@ import com.oktwohundred.corona.preventcorona.BaseAtivity;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
 import com.oktwohundred.corona.preventcorona.Model.insights;
+import com.oktwohundred.corona.preventcorona.Model.region;
 import com.oktwohundred.corona.preventcorona.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -62,13 +67,24 @@ public class MainActivity extends BaseAtivity {
     TextView errormessage;
     FirebaseAuth auth;
     DatabaseReference firebaseRef;
+    String count ="";
+    TextView rRisk;
+    TextView rChans;
+    TextView rCount;
+    TextView rCity;
+    TextView rSurv;
+    TextView rVics;
+    TextView rCas;
+
 
 
 
     @Override
     public void initViews(Bundle savedInstanceState) {
         getLocale(getResources());
+
         database = new DbManager(MainActivity.this);
+        count = ""+database.getUserData().getUserCountry();
         auth = FirebaseAuth.getInstance();
         errormessage = findViewById(R.id.errormessage);
         progressloader = findViewById(R.id.progressloader);
@@ -79,6 +95,13 @@ public class MainActivity extends BaseAtivity {
         iAdapter = new insightAdapter(insItems, MainActivity.this);
         navView = findViewById(R.id.navView);
         dLayout = findViewById(R.id.dLayout);
+         rRisk= findViewById(R.id.rRisk);
+         rChans= findViewById(R.id.rChans);
+         rCount= findViewById(R.id.rCount);
+         rCity= findViewById(R.id.rCity);
+         rSurv= findViewById(R.id.rSurv);
+         rVics= findViewById(R.id.rVics);
+        TextView rCas;
         usernametitle = findViewById(R.id.usernametitle);
         String uname = ""+database.getUserData().getUserName();
         Log.i(PYC_LOG,"User name is "+uname);
@@ -101,6 +124,7 @@ public class MainActivity extends BaseAtivity {
         openmr = findViewById(R.id.openmr);
         opensettings = findViewById(R.id.opensettings);
         shownavigation = findViewById(R.id.shownavigation);
+
     }
 
     @Override
@@ -110,7 +134,9 @@ public class MainActivity extends BaseAtivity {
 
     @Override
     public void setListener() {
+        getDate();
         loadInsights();
+        loadRegionDetails();
         shownavigation.setOnClickListener(openDrawerListenr);
         closedrawer_btn.setOnClickListener(closeDrawerListenr);
         openProfile.setOnClickListener(openProfileListner);
@@ -125,6 +151,18 @@ public class MainActivity extends BaseAtivity {
 
     }
 
+    private void getDate (){
+        String currentDate = new SimpleDateFormat("dd, MM, yyyy", Locale.getDefault()).format(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        TextView cDAY = findViewById(R.id.cDAY);
+        TextView cDate = findViewById(R.id.cDate);
+        cDAY.setText(dayOfTheWeek);
+        cDate.setText(currentDate);
+
+
+    }
     private void loadInsights() {
         insItems.clear();
         firebaseRef = FirebaseDatabase.getInstance().getReference("Insights");
@@ -132,7 +170,8 @@ public class MainActivity extends BaseAtivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 progressloader.setVisibility(View.GONE);
-               if (dataSnapshot.exists()){
+
+                if (dataSnapshot.exists()){
                    for (DataSnapshot shots : dataSnapshot.getChildren()){
                        insights getAllInsights = shots.getValue(insights.class);
 
@@ -151,6 +190,47 @@ public class MainActivity extends BaseAtivity {
                    errormessage.setText("No Insights available");
                    errormessage.setVisibility(View.VISIBLE);
                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                errormessage.setText("No Insights available");
+                errormessage.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+    private void loadRegionDetails() {
+        insItems.clear();
+        firebaseRef = FirebaseDatabase.getInstance().getReference("Regions");
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressloader.setVisibility(View.GONE);
+               if (dataSnapshot.exists()){
+                   for (DataSnapshot shots : dataSnapshot.getChildren()){
+                       region getTheRegion = shots.getValue(region.class);
+                       String country = getTheRegion.getCountry();
+                       if (country.equalsIgnoreCase(count)){
+                           String risk = getTheRegion.getRisk();
+                           String chance = getTheRegion.getChance();
+                           String cities = getTheRegion.getCities();
+                           String survivors = getTheRegion.getSurvivors();
+                           String victims = getTheRegion.getVictims();
+                           String death= getTheRegion.getDeath();
+                            rRisk.setText(risk);
+                            rChans.setText(chance);
+                            rCount.setText(country);
+                            rCity.setText(cities);
+                            rSurv.setText(survivors);
+                            rVics.setText(victims);
+                            rCas.setText(death);
+                       }
+
+                   }
+
+               }
+
 
 
             }

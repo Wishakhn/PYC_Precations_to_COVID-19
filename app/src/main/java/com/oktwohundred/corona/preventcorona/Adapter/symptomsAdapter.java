@@ -13,36 +13,43 @@ import com.oktwohundred.corona.preventcorona.R;
 
 import java.util.List;
 
-public class childAdapter extends RecyclerView.Adapter<childAdapter.childViewHolder> {
+public class symptomsAdapter extends RecyclerView.Adapter<symptomsAdapter.childViewHolder> {
     List<child> childItems;
 
-    public childAdapter(List<child> childItems) {
+    public symptomsAdapter(List<child> childItems) {
         this.childItems = childItems;
     }
 
     @NonNull
     @Override
-    public childAdapter.childViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public symptomsAdapter.childViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_child, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_symptom, parent, false);
         return new childViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull childAdapter.childViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull symptomsAdapter.childViewHolder holder, int position) {
         child model = childItems.get(position);
         String title = model.getChildName();
         String des = model.getChildDescrip();
         if(des.equalsIgnoreCase("none"))
         {
-            holder.ingdescrip.setVisibility(View.INVISIBLE);
+            holder.sympdescp.setVisibility(View.GONE);
         }
         else {
-            holder.ingdescrip.setText(des);
+            holder.sympdescp.setText(des);
 
         }
 
-        holder.ingtitle.setText(title);
+        if (title.equalsIgnoreCase("none")){
+            holder.symptitle.setVisibility(View.GONE);
+        }
+        else {
+            holder.symptitle.setText(title);
+
+        }
+
     }
 
     @Override
@@ -51,12 +58,13 @@ public class childAdapter extends RecyclerView.Adapter<childAdapter.childViewHol
     }
 
     public class childViewHolder extends RecyclerView.ViewHolder {
-        TextView ingdescrip;
-        TextView ingtitle;
+        TextView symptitle;
+        TextView sympdescp;
         public childViewHolder(@NonNull View v) {
             super(v);
-            ingdescrip = v.findViewById(R.id.ingdescrip);
-            ingtitle = v.findViewById(R.id.ingtitle);
+
+            sympdescp = v.findViewById(R.id.sympdescp);
+            symptitle =v. findViewById(R.id.symptitle);
 
         }
     }

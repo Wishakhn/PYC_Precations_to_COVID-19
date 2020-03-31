@@ -75,9 +75,10 @@ public class PrecautionFragment extends Fragment {
                             String feedname = precautions.getFeedName();
                             String feedintro = precautions.getFeedIntro();
                             String feeddescrip = precautions.getFeedDescrip() ;
-                            float feedrating = precautions.getFeedRating();
-                            boolean isSaved = precautions.isSaved();
-                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
+                            String feedrating = precautions.getFeedRating();
+                            String isSaved = precautions.getIsSaved();
+                            List<child> IsChild = precautions.getIngs();
+                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved, IsChild);
                             feedItems.add(model);
                         }
                     }

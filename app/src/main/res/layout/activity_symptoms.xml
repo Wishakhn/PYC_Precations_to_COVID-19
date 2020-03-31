@@ -39,13 +39,20 @@
                 android:layout_marginStart="20dp"
                 />
             <TextView
+
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Some Symptoms theory"/>
+                android:text="@string/reported"
+                android:justificationMode="inter_word"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sympCycler"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_symptom"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,10 +68,16 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Some Symptoms theory"/>
+                android:text="@string/stages_descrip"
+                android:justificationMode="inter_word"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stageCycler"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_symptom"/>
 
         </LinearLayout>
     </ScrollView>

@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oktwohundred.corona.preventcorona.Adapter.saveditemAdapter;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
+import com.oktwohundred.corona.preventcorona.Model.child;
 import com.oktwohundred.corona.preventcorona.Model.feeds;
 import com.oktwohundred.corona.preventcorona.Model.savedfeeds;
 import com.oktwohundred.corona.preventcorona.R;
@@ -81,8 +82,19 @@ public class SaveFeedFragment extends Fragment {
                             String feedname = remedies.getFeedName();
                             String feedintro = remedies.getFeedIntro();
                             String feeddescrip = remedies.getFeedDescrip() ;
-                            float feedrating = remedies.getFeedRating();
-                            boolean isSaved = remedies.isSaved();
+                            String feedrating = remedies.getFeedRating();
+                            String isSaved = remedies.getIsSaved();
+                            List<child> childIs = remedies.getIngs();
+                            feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved,childIs);
+                            saveItems.add(model);
+                        }
+                        else {
+                            String feedid = remedies.getFeedId();
+                            String feedname = remedies.getFeedName();
+                            String feedintro = remedies.getFeedIntro();
+                            String feeddescrip = remedies.getFeedDescrip() ;
+                            String feedrating = remedies.getFeedRating();
+                            String isSaved = remedies.getIsSaved();
                             feeds model = new feeds(feedid,feedtype,feedname,feedintro,feeddescrip,feedrating,isSaved);
                             saveItems.add(model);
                         }

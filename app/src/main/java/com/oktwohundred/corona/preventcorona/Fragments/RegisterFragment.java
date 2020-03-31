@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.oktwohundred.corona.preventcorona.Adapter.timezoneAdapter;
 import com.oktwohundred.corona.preventcorona.Helpers.CommonMethods;
+import com.oktwohundred.corona.preventcorona.Helpers.Constants;
 import com.oktwohundred.corona.preventcorona.Helpers.PermissionHandler;
 import com.oktwohundred.corona.preventcorona.Helpers.preferenceClass;
 import com.oktwohundred.corona.preventcorona.LocalDatabase.DbManager;
@@ -65,6 +66,7 @@ import static com.oktwohundred.corona.preventcorona.Helpers.Constants.REQUEST_PE
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.RESULT_CAPTURE_IMAGE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.RESULT_LOAD_IMAGE;
 import static com.oktwohundred.corona.preventcorona.Helpers.Constants.SORRY;
+import static com.oktwohundred.corona.preventcorona.Helpers.Constants.countries;
 
 
 public class RegisterFragment extends Fragment {
@@ -245,7 +247,8 @@ public class RegisterFragment extends Fragment {
     }
 
     void setLisnterforFragment() {
-        loadAllcountries();
+//        loadAllcountries();
+        loadAffectedcountries();
         btn_reg.setOnClickListener(registerListener);
         uploadimage_reg.setOnClickListener(getImageListner);
         logintext.setOnClickListener(new View.OnClickListener() {
@@ -403,6 +406,16 @@ public class RegisterFragment extends Fragment {
                 countryItem.add(new allcountry(country));
             }
         }
+        tAdapter.notifyDataSetChanged();
+        timezonecylcer.setAdapter(tAdapter);
+        tAdapter.notifyDataSetChanged();
+
+    }
+    private void loadAffectedcountries() {
+        for (int i=0; i< Constants.countries.length; i++){
+            countryItem.add(new allcountry(countries[i]));
+        }
+
         tAdapter.notifyDataSetChanged();
         timezonecylcer.setAdapter(tAdapter);
         tAdapter.notifyDataSetChanged();

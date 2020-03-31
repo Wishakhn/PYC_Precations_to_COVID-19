@@ -1,15 +1,34 @@
 package com.oktwohundred.corona.preventcorona.Model;
 
+import java.util.List;
+
 public class feeds {
     String feedId;
     String feedType;
     String feedName;
     String feedIntro;
     String feedDescrip;
-    float feedRating;
-    boolean isSaved;
+    String feedRating;
+    String isSaved;
+    List<child> Ings;
 
-    public feeds(String feedId, String feedType, String feedName, String feedIntro, String feedDescrip, float feedRating, boolean isSaved) {
+    public String getIsSaved() {
+        return isSaved;
+    }
+
+    public void setIsSaved(String isSaved) {
+        this.isSaved = isSaved;
+    }
+
+    public List<child> getIngs() {
+        return Ings;
+    }
+
+    public void setIngs(List<child> ings) {
+        Ings = ings;
+    }
+
+    public feeds(String feedId, String feedType, String feedName, String feedIntro, String feedDescrip, String feedRating, String isSaved) {
         this.feedId = feedId;
         this.feedType = feedType;
         this.feedName = feedName;
@@ -20,6 +39,17 @@ public class feeds {
     }
 
     public feeds() {
+    }
+
+    public feeds(String feedId, String feedType, String feedName, String feedIntro, String feedDescrip, String feedRating, String isSaved, List<child> ings) {
+        this.feedId = feedId;
+        this.feedType = feedType;
+        this.feedName = feedName;
+        this.feedIntro = feedIntro;
+        this.feedDescrip = feedDescrip;
+        this.feedRating = feedRating;
+        this.isSaved = isSaved;
+        Ings = ings;
     }
 
     public String getFeedId() {
@@ -62,19 +92,13 @@ public class feeds {
         this.feedDescrip = feedDescrip;
     }
 
-    public float getFeedRating() {
+    public String getFeedRating() {
         return feedRating;
     }
 
-    public void setFeedRating(float feedRating) {
+    public void setFeedRating(String feedRating) {
         this.feedRating = feedRating;
     }
 
-    public boolean isSaved() {
-        return isSaved;
-    }
 
-    public void setSaved(boolean saved) {
-        isSaved = saved;
-    }
 }

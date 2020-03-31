@@ -35,11 +35,15 @@
                 android:layout_height="wrap_content"
                 android:queryHint="Search here . . . ."
                 android:iconifiedByDefault="false"
-                android:closeIcon="@drawable/no_blue"
-                android:searchIcon="@drawable/search_blue"
+                android:closeIcon="@drawable/no_white"
+                android:searchIcon="@drawable/search_white"
                 android:queryBackground="@null"
                 />
         </LinearLayout>
+        <include layout="@layout/progresslayout"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

@@ -5,9 +5,17 @@ public class savedfeeds {
     String feedName;
     String feedIntro;
     String feedDescrip;
-    float feedRating;
+    String feedRating;
 
-    public savedfeeds(String feedType, String feedName, String feedIntro, String feedDescrip, float feedRating) {
+    public String getFeedRating() {
+        return feedRating;
+    }
+
+    public void setFeedRating(String feedRating) {
+        this.feedRating = feedRating;
+    }
+
+    public savedfeeds(String feedType, String feedName, String feedIntro, String feedDescrip, String feedRating) {
         this.feedType = feedType;
         this.feedName = feedName;
         this.feedIntro = feedIntro;
@@ -50,11 +58,5 @@ public class savedfeeds {
         this.feedDescrip = feedDescrip;
     }
 
-    public float getFeedRating() {
-        return feedRating;
-    }
 
-    public void setFeedRating(float feedRating) {
-        this.feedRating = feedRating;
-    }
 }

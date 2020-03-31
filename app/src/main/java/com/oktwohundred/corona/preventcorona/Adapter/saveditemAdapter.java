@@ -32,8 +32,6 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
 
     Context context;
     List<feeds> savedItems;
-    List<child> childItem = new ArrayList<>();
-    childAdapter cAdapter = new childAdapter(childItem);
 
 
     public saveditemAdapter(Context context, List<feeds> savedItems) {
@@ -55,18 +53,22 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
         String feedtype = model.getFeedType();
         String title = model.getFeedName();
         String descript = model.getFeedDescrip();
-        float rating = model.getFeedRating();
+        float rating = Float.parseFloat(model.getFeedRating());
         final String id = model.getFeedId();
+        List<child> isChild = model.getIngs();
+
+
 
         if (feedtype.equalsIgnoreCase("remedy")){
             holder.display.setVisibility(View.VISIBLE);
-            getallchilds(id);
+            childAdapter cAdapter = new childAdapter(isChild);
             holder.childcycler.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
         }
         else {
             holder.display.setVisibility(View.GONE);
         }
+        holder.savebtn.setVisibility(View.INVISIBLE);
         holder.cardtitile.setText(title);
         holder.cardescrip.setText(descript);
         holder.reviewrating.setRating(rating);
@@ -88,33 +90,6 @@ public class saveditemAdapter extends RecyclerView.Adapter<saveditemAdapter.save
     @Override
     public int getItemCount() {
         return savedItems.size();
-    }
-    private void getallchilds(final String id) {
-        DbManager db = new DbManager(context);
-        String uid = ""+db.getUserData().getFirebaseId();
-        childItem.clear();
-        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference("SavedFeeds").child(uid).child(id).child("Ings");
-        firebaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot shots : dataSnapshot.getChildren()){
-                        child cmodel = shots.getValue(child.class);
-                        String name = cmodel.getChildName();
-                        String measure = cmodel.getChildDescrip();
-                        child model = new child(name,measure);
-                        childItem.add(model);
-                    }
-                    cAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
     public class savedViewholder extends RecyclerView.ViewHolder {

@@ -57,8 +57,8 @@ public class searchfeedsAdapter extends RecyclerView.Adapter<searchfeedsAdapter.
         String feedtype = model.getFeedType();
         String title = model.getFeedName();
         String descript = model.getFeedDescrip();
-        float rating = model.getFeedRating();
-        boolean saved = model.isSaved();
+        float rating = Float.parseFloat(model.getFeedRating());
+        boolean saved = Boolean.parseBoolean(model.getIsSaved());
         String id = model.getFeedId();
         if (feedtype.equalsIgnoreCase("remedy")){
             holder.display.setVisibility(View.VISIBLE);
