@@ -87,7 +87,7 @@ public class SettingOptions extends BaseAtivity {
 
     void  callHelpFragment(){
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        HelpFragment frag1 = new HelpFragment();
+        HelpFragment frag1 = new HelpFragment(SettingOptions.this);
         fragmentTransaction.replace(container_settFragment.getId(), frag1, "Help  Fragment");
         fragmentTransaction.commit();
     }

@@ -48,6 +48,7 @@
                 android:textSize="15sp"
                 android:textColor="@color/titletext_black"/>
             <EditText
+                android:id="@+id/sendermail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -72,9 +73,9 @@
             android:background="@drawable/field_background">
 
             <EditText
+                android:id="@+id/descripmailEdit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:singleLine="true"
                 android:imeOptions="actionNext"
                 android:background="@null"
                 android:layout_weight="4.5"

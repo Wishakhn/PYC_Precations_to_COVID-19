@@ -21,6 +21,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,6 +64,7 @@ public class LoginFragment extends Fragment {
 
     private TextView errortextpass1;
     private TextView errortextmail1;
+    private TextView forgetpass;
     Context context;
     preferenceClass prefs;
     public LoginFragment(Context context) {
@@ -87,6 +89,7 @@ public class LoginFragment extends Fragment {
         log_mailview = lv.findViewById(R.id.log_mailview);
         errortextpass1 = lv.findViewById(R.id.errortextpass1);
         errortextmail1 = lv.findViewById(R.id.errortextmail1);
+        forgetpass = lv.findViewById(R.id.forgetpass);
         underline(registerFragment);
 
         logmailedit.addTextChangedListener(mailListener);
@@ -114,6 +117,12 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 callRegisterFragment();
+            }
+        });
+        forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "This Feature will available in next update..", Toast.LENGTH_SHORT).show();
             }
         });
         return lv;

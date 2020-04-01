@@ -372,6 +372,11 @@
                 android:text="Already have an account? Login."
                 android:textColor="#1249FC"
                 android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/okcompanylogo"/>
         </LinearLayout>
 
     </ScrollView>

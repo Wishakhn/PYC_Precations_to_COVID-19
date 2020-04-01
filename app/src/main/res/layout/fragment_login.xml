@@ -172,7 +172,11 @@
             android:fontFamily="@font/helvetica_neue_medium"
             android:textSize="15sp"
             android:textColor="#1249FC"/>
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/okcompanylogo"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 </LinearLayout>

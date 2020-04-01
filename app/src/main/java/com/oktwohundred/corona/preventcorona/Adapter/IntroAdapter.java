@@ -1,8 +1,6 @@
 package com.oktwohundred.corona.preventcorona.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +15,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.oktwohundred.corona.preventcorona.Fragments.LoginFragment;
 import com.oktwohundred.corona.preventcorona.Fragments.WebViewFragment;
 import com.oktwohundred.corona.preventcorona.Model.blogs;
 import com.oktwohundred.corona.preventcorona.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -67,17 +62,17 @@ public class IntroAdapter extends RecyclerView.Adapter<IntroAdapter.introViewhol
         holder.readblogbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callLoginFragment(url);
+                callWebFragment(url);
             }
         });
 
 
     }
 
-    void  callLoginFragment(String url){
+    void callWebFragment(String url){
         FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        WebViewFragment frag1 = new WebViewFragment(url);
+        WebViewFragment frag1 = new WebViewFragment(url,context);
         fragmentTransaction.replace(frame.getId(), frag1, "Web  Fragment");
         fragmentTransaction.commit();
     }
